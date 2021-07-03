@@ -1,6 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*.pyc
+__pycache__\app.cpython-39.pyc
 
 # C extensions
 *.so
