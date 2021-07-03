@@ -1,13 +1,22 @@
+import math
+
 class Space:
     '''this class represent the 3d space that will be projected on the canvas'''
     def __init__(self):
         #adding the dots array, dots will be x,y,z tuples
         self.dots=[]
         self.add_square(10,10,10,100,100,200)
+        #the matrix to enable rotation around Y
+        self.rotation =[
+            [1,0,0],
+            [0,1,0],
+            [0,0,1]
+        ]
     
-    def rotate(angle):
+    def rotate(self, angle):
         '''this method will rotate all the dots around y0 axis with the help of rotation matrix'''
-        pass
+        for dot in self.dots:
+            pass
     
     def add_square(self, x1,y1,z1, x2,y2,z2):
         '''this method add a square to our vectorial space'''
