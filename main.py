@@ -1,4 +1,6 @@
 from app import App
+from space import Space
 
-application = App()
+space = Space()
+application = App(space)
 application.mainloop()
