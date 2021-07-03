@@ -23,3 +23,22 @@ class Space:
             self.dots.append((i,y2,z2))
         
         #we now proceed to do the same on Y and Z
+        for i in range(y1, y2):
+            #X=x1 Z=z1
+            self.dots.append((x1,i,z1))
+            #X=x2 Z=z1
+            self.dots.append((x2,i,z1))
+            #X=x1 Z=z2
+            self.dots.append((x1,i,z2))
+            #X=x2 Z=z2
+            self.dots.append((x2,i,z2))
+
+        for i in range(z1, z2):
+            #X=x1 Y=y1
+            self.dots.append((x1,y1,i))
+            #X=x2 Y=y1
+            self.dots.append((x2,y1,i))
+            #X=x1 Y=y2
+            self.dots.append((x1,y2,i))
+            #X=x2 Y=y2
+            self.dots.append((x2,y2,i))
