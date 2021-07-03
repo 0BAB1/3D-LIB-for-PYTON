@@ -1,2 +1,2 @@
 #dependencies:
-pip install numpy
+python math
