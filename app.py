@@ -34,4 +34,3 @@ class App (tk.Tk):
         '''this method wil add, one by one, all the space's dots with only their x and y coords'''
         for dot in self.space.dots:
             self.add_dot(dot[0], dot[1]) #as the dot is projected, only x (dot[0]) and y (dot[1]) coords wil be used
-            print(dot)

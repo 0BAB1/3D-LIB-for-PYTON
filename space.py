@@ -5,9 +5,6 @@ class Space:
     def __init__(self):
         #adding the dots array, dots will be x,y,z tuples
         self.dots=[]
-        self.add_square(100,200,10, 200,300,200)
-        self.rotateY()
-        self.rotateX()
     
     def rotateY(self, angle=1):
         '''this method will rotate all the dots around y0 axis with the help of rotation matrix'''
