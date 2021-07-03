@@ -5,6 +5,10 @@ class Space:
         self.dots=[]
         self.add_square(10,10,10,100,100,200)
     
+    def rotate(angle):
+        '''this method will rotate all the dots around y0 axis with the help of rotation matrix'''
+        pass
+    
     def add_square(self, x1,y1,z1, x2,y2,z2):
         '''this method add a square to our vectorial space'''
         # here on x axis , adding 1 dot/pixel, as it is a cube, 4 edeges go the same way, so we do it 4x, 
