@@ -7,11 +7,11 @@ class App (tk.Tk):
         tk.Tk.__init__(self)
         self.geometry("720x480")
         self.resizable(False, False)
-        self.make_widgets()
         #array containing dots on the screen
         self.dots = []
         self.space = space
         #represent the space
+        self.make_widgets()
         self.represent_space()
     
     def make_widgets(self):
@@ -32,6 +32,7 @@ class App (tk.Tk):
 
     def represent_space(self):
         '''this method wil add, one by one, all the space's dots with only their x and y coords'''
+        self.reset()
         for dot in self.space.dots:
             self.add_dot(dot[0], dot[1], "black") #as the dot is projected, only x (dot[0]) and y (dot[1]) coords wil be used
 
