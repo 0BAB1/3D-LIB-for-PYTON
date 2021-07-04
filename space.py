@@ -121,3 +121,8 @@ class Space:
             self.dots.append((x1,y2,i))
             #X=x2 Y=y2
             self.dots.append((x2,y2,i))
+        
+    def add_sphere(self, x, y, z, r):
+        '''add a sphere at specified coords, with specified radius'''
+        #équation sphere (XYZ = points coords xyz = center coords): R^2 = (X-x)^2 + (Y-y)^2 + (Z-z)^2
+        pass
