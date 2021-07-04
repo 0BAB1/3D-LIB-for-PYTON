@@ -11,7 +11,7 @@ space = Space()
 #NB : angle in rad
 
 # EXAMPLE : 
-# space.add_square(100,100,100,200,200,300)
+# space.add_square(100,100,100,150,150,150)
 # space.rotateX(.1)
 # space.rotateY(.5)
 application = App(space)
