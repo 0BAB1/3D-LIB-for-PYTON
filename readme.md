@@ -1,2 +1,3 @@
-#dependencies:
+#dependencies
 python math
+python tkinter
