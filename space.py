@@ -75,11 +75,21 @@ class Space:
             [math.sin(angle),math.cos(angle),0],
             [0,0,1]
         ]
-        for i in range(len(self.dots)):
-            new_x=rotationZ[0][0]*self.dots[i][0]+rotationZ[0][1]*self.dots[i][1]+rotationZ[0][2]*self.dots[i][2]
-            new_y=rotationZ[1][0]*self.dots[i][0]+rotationZ[1][1]*self.dots[i][1]+rotationZ[1][2]*self.dots[i][2]
-            new_z=rotationZ[2][0]*self.dots[i][0]+rotationZ[2][1]*self.dots[i][1]+rotationZ[2][2]*self.dots[i][2]
-            self.dots[i] = (new_x, new_y, new_z)
+
+        for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
+            #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
+            for i in range(len(value)):
+                new_x=rotationZ[0][0]*self.dots[name][i][0]+rotationZ[0][1]*self.dots[name][i][1]+rotationZ[0][2]*self.dots[name][i][2]
+                new_y=rotationZ[1][0]*self.dots[name][i][0]+rotationZ[1][1]*self.dots[name][i][1]+rotationZ[1][2]*self.dots[name][i][2]
+                new_z=rotationZ[2][0]*self.dots[name][i][0]+rotationZ[2][1]*self.dots[name][i][1]+rotationZ[2][2]*self.dots[name][i][2]
+
+                self.dots[name][i] = (new_x, new_y, new_z, self.dots[name][i][3])
+
+        # for i in range(len(self.dots)):
+        #     new_x=rotationZ[0][0]*self.dots[i][0]+rotationZ[0][1]*self.dots[i][1]+rotationZ[0][2]*self.dots[i][2]
+        #     new_y=rotationZ[1][0]*self.dots[i][0]+rotationZ[1][1]*self.dots[i][1]+rotationZ[1][2]*self.dots[i][2]
+        #     new_z=rotationZ[2][0]*self.dots[i][0]+rotationZ[2][1]*self.dots[i][1]+rotationZ[2][2]*self.dots[i][2]
+        #     self.dots[i] = (new_x, new_y, new_z)
         
         for i in range(len(self.origin_dots)):
             new_x=rotationZ[0][0]*self.origin_dots[i][0]+rotationZ[0][1]*self.origin_dots[i][1]+rotationZ[0][2]*self.origin_dots[i][2]
