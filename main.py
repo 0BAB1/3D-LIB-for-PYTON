@@ -16,4 +16,6 @@ space.rotate(0.5,0.5,0.5)
 # to delete a shape:
 # space.del_shape("square1")
 application = App(space)
+space.add_line(0,0,0,-150,-150,-150,"line2","pink")
+application.represent_space()
 application.mainloop()

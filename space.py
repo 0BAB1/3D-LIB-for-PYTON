@@ -22,6 +22,7 @@ class Space:
 
     def rotate(self,x,y,z):
         '''to rotate every shapes around X0, Y0 and Z0 axis'''
+        self.rotations = (self.rotations[0]+x,self.rotations[1]+y,self.rotations[2]+z)
         rotationY =[
             [math.cos(y),    0,    math.sin(y)],
             [0              ,1              ,0],
