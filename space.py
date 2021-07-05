@@ -82,7 +82,19 @@ class Space:
             new_y=rotationZ[1][0]*self.origin_dots[i][0]+rotationZ[1][1]*self.origin_dots[i][1]+rotationZ[1][2]*self.origin_dots[i][2]
             new_z=rotationZ[2][0]*self.origin_dots[i][0]+rotationZ[2][1]*self.origin_dots[i][1]+rotationZ[2][2]*self.origin_dots[i][2]
             self.origin_dots[i] = (new_x, new_y, new_z)
-            
+
+    def add_line(self,x1,y1,z1, x2,y2,z2):
+        '''to add a simple line and create custom shapes'''
+        vector=[
+            x2-x1,
+            y2-y1,
+            z2-z1
+        ]
+
+        for x in range(x1,x2):
+            y=x*vector[1]/vector[0]
+            z=x*vector[2]/vector[0]
+            self.dots.append((x,y,z))
     
     def add_square(self, x1,y1,z1, x2,y2,z2):
         '''this method add a square to our vectorial space'''
@@ -121,8 +133,3 @@ class Space:
             self.dots.append((x1,y2,i))
             #X=x2 Y=y2
             self.dots.append((x2,y2,i))
-        
-    def add_sphere(self, x, y, z, r):
-        '''add a sphere at specified coords, with specified radius'''
-        #équation sphere (XYZ = points coords xyz = center coords): R^2 = (X-x)^2 + (Y-y)^2 + (Z-z)^2
-        pass
