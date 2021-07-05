@@ -10,9 +10,11 @@ space = Space()
 #NB : angle in rad
 
 #some examples :
-# space.add_square(0,0,0,150,150,150)
-# space.add_line(0,0,0,150,150,150)
+space.add_square(0,0,0,150,150,150,"square1", "green")
+space.add_line(0,0,0,150,150,150,"line1","pink")
 # space.rotateX(.5)
 # space.rotateY(.5)
+# to delete a shape:
+# space.del_shape("square1")
 application = App(space)
 application.mainloop()

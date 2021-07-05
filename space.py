@@ -4,7 +4,7 @@ class Space:
     '''this class represent the 3d space that will be projected on the canvas'''
     def __init__(self):
         #adding the dots array, dots will be x,y,z tuples
-        self.dots=[]
+        self.dots={}
         self.origin_dots=[] #origin dots are set apart from other ones so we can change colors later on
         self.origin()
         self.rotations = {"x" : 0, "y" : 0, "z" : 0} #to keep track of all rotations for later-added shapes
@@ -17,6 +17,9 @@ class Space:
             self.origin_dots.append((0,i,0))
             self.origin_dots.append((0,0,i)) #identity matrix ! coincidence ? i think not !
     
+    def del_shape(self, name):
+        self.dots.pop(name)
+
     def rotateY(self, angle=1):
         '''this method will rotate all the dots around y0 axis with the help of rotation matrix'''
         #the matrix to enable rotation around Y
@@ -84,8 +87,11 @@ class Space:
             new_z=rotationZ[2][0]*self.origin_dots[i][0]+rotationZ[2][1]*self.origin_dots[i][1]+rotationZ[2][2]*self.origin_dots[i][2]
             self.origin_dots[i] = (new_x, new_y, new_z)
 
-    def add_line(self,x1,y1,z1, x2,y2,z2):
+    def add_line(self,x1,y1,z1, x2,y2,z2,name,color="black"):
         '''to add a simple line and create custom shapes'''
+        #each point has a position in origin1 and a color attribute, those are associated with their name (ids)
+        self.dots[name] = []
+
         vector=[
             x2-x1,
             y2-y1,
@@ -95,42 +101,43 @@ class Space:
         for x in range(x1,x2):
             y=x*vector[1]/vector[0]
             z=x*vector[2]/vector[0]
-            self.dots.append((x,y,z))
+            self.dots[name].append((x,y,z,color))
     
-    def add_square(self, x1,y1,z1, x2,y2,z2):
+    def add_square(self, x1,y1,z1, x2,y2,z2, name, color="black"):
         '''this method add a square to our vectorial space'''
         # here on x axis , adding 1 dot/pixel, as it is a cube, 4 edeges go the same way, so we do it 4x, 
         # in Y=y1 / Z=z1 ,
         # then in Y=y2 / Z=z1,
         # then in Y=y1 / Z=z2
         # and finally on Y=y2 and Z=z2
+        self.dots[name] = []
         for i in range(x1, x2):
             #Y=y1 Z=1
-            self.dots.append((i,y1,z1))
+            self.dots[name].append((i,y1,z1,color))
             #Y=y2 Z=z1
-            self.dots.append((i,y2,z1))
+            self.dots[name].append((i,y2,z1,color))
             #Y=y1 Z=z2
-            self.dots.append((i,y1,z2))
+            self.dots[name].append((i,y1,z2,color))
             #Y=y2 Z=z2
-            self.dots.append((i,y2,z2))
+            self.dots[name].append((i,y2,z2,color))
         
         #we now proceed to do the same on Y and Z
         for i in range(y1, y2):
             #X=x1 Z=z1
-            self.dots.append((x1,i,z1))
+            self.dots[name].append((x1,i,z1,color))
             #X=x2 Z=z1
-            self.dots.append((x2,i,z1))
+            self.dots[name].append((x2,i,z1,color))
             #X=x1 Z=z2
-            self.dots.append((x1,i,z2))
+            self.dots[name].append((x1,i,z2,color))
             #X=x2 Z=z2
-            self.dots.append((x2,i,z2))
+            self.dots[name].append((x2,i,z2,color))
 
         for i in range(z1, z2):
             #X=x1 Y=y1
-            self.dots.append((x1,y1,i))
+            self.dots[name].append((x1,y1,i,color))
             #X=x2 Y=y1
-            self.dots.append((x2,y1,i))
+            self.dots[name].append((x2,y1,i,color))
             #X=x1 Y=y2
-            self.dots.append((x1,y2,i))
+            self.dots[name].append((x1,y2,i,color))
             #X=x2 Y=y2
-            self.dots.append((x2,y2,i))
+            self.dots[name].append((x2,y2,i,color))

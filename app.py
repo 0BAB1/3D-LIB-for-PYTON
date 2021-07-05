@@ -23,6 +23,7 @@ class App (tk.Tk):
         '''add dot a specified coords (x,y) on the canvas'''
         #create a black dot, create line returns its id so we can delete it later on
         self.dots.append(self.m_canvas.create_line(x+720/2, y+480/2, x+720/2+1, y+480/2, fill=color))
+        #the 480 and 720 values are canvas' width and height, this has to be improved
 
     def reset(self):
         '''used to delete all dots on the screen'''
@@ -31,10 +32,16 @@ class App (tk.Tk):
         self.dots = []
 
     def represent_space(self):
-        '''this method wil add, one by one, all the space's dots with only their x and y coords'''
+        '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
         self.reset()
-        for dot in self.space.dots:
-            self.add_dot(dot[0], dot[1], "black") #as the dot is projected, only x (dot[0]) and y (dot[1]) coords wil be used
-
+        #structure of space.dots:
+        #
+        # {"name" : [(x,y,z,color) , (x,y,z,color) , ...] , ...}
+        #
+        for name, shape in self.space.dots.items():
+            #as the dot is projected, only x and y coords wil be used
+            for dot in shape:
+                self.add_dot(dot[0], dot[1], dot[3])
+            
         for dot in self.space.origin_dots:
             self.add_dot(dot[0], dot[1], "red")
