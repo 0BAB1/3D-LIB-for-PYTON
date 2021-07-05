@@ -12,7 +12,6 @@ class App (tk.Tk):
         self.space = space
         #represent the space
         self.make_widgets()
-        self.represent_space()
     
     def make_widgets(self):
         '''create a test canvas'''

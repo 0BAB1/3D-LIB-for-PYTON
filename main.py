@@ -12,10 +12,10 @@ space = Space()
 #some examples :
 space.add_square(0,0,0,150,150,150,"square1", "green")
 space.add_line(0,0,0,150,150,150,"line1","yellow")
+space.add_line(0,0,0,100,100,100,"line2","pink")
 space.rotate(0.5,0.5,0.5)
 # to delete a shape:
 # space.del_shape("square1")
 application = App(space)
-space.add_line(0,0,0,-150,-150,-150,"line2","pink")
 application.represent_space()
 application.mainloop()

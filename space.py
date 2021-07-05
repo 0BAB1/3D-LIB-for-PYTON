@@ -15,7 +15,7 @@ class Space:
         for i in range(0,axis_lenght,2):
             self.origin_dots.append((i,0,0))
             self.origin_dots.append((0,i,0))
-            self.origin_dots.append((0,0,i)) #identity matrix ! coincidence ? i think not !
+            self.origin_dots.append((0,0,i))
     
     def del_shape(self, name):
         self.dots.pop(name)
