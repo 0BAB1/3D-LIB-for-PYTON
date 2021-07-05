@@ -1,2 +1,1 @@
-1) create another space R1, in which every new shape is dipslayed, so rotations
-are always applied to new shapes
+improve rotations, keep track of them, when we add rotation, re-rotate every shapes
