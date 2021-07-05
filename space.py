@@ -7,6 +7,7 @@ class Space:
         self.dots=[]
         self.origin_dots=[] #origin dots are set apart from other ones so we can change colors later on
         self.origin()
+        self.rotations = {"x" : 0, "y" : 0, "z" : 0} #to keep track of all rotations for later-added shapes
     
     def origin(self):
         '''this function will draw the main origin at 0,0,0 into the space'''
