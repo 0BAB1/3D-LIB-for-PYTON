@@ -4,18 +4,6 @@ from space import Space
 
 #basic use : create a space and an application
 space = Space()
-#COMMANDS
-#
-#as it is the first version, you can only create a square : space.add_square(x1,y1,z1,x2,y2,z2) and rotate it around with space.rotateX(angle) space.rotateY(angle) or space.rotateZ(angle)
-#NB : angle in rad
-
-#some examples :
-space.add_square(0,0,0,150,150,150,"square1", "green")
-space.add_line(0,0,0,150,150,150,"line1","yellow")
-space.add_line(0,0,0,100,100,100,"line2","pink")
-space.rotate(0.5,0.5,0.5)
-# to delete a shape:
-# space.del_shape("square1")
 application = App(space)
 application.represent_space()
 application.mainloop()
