@@ -5,4 +5,5 @@ from space import Space
 space = Space()
 application = App(space)
 space.add_square(-10,-10,-10,-100,-100,100,"square1", "green")
+space.add_surf(0,0,10,100,100,0,0,1,"surf1", "yellow")
 application.mainloop()

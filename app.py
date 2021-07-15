@@ -13,11 +13,13 @@ class App (tk.Tk):
         #represent the space
         self.make_widgets()
         #binds
-        self.m_canvas.bind_all("<Right>", lambda x: self.space.rotate(0.1,0,0), add="+")
+        self.m_canvas.bind_all("<Right>", lambda x: self.space.rotate(0,0.1,0), add="+")
         self.m_canvas.bind_all("<Right>", lambda x: self.represent_space(), add="+")
-        self.m_canvas.bind_all("<Down>", lambda x: self.space.rotate(0,0,0.1))
+        self.m_canvas.bind_all("<Left>", lambda x: self.space.rotate(0,-0.1,0), add="+")
+        self.m_canvas.bind_all("<Left>", lambda x: self.represent_space(), add="+")
+        self.m_canvas.bind_all("<Down>", lambda x: self.space.rotate(0.1,0,0))
         self.m_canvas.bind_all("<Down>", lambda x: self.represent_space(), add="+")
-        self.m_canvas.bind_all("<Up>", lambda x: self.space.rotate(0,0.1,0))
+        self.m_canvas.bind_all("<Up>", lambda x: self.space.rotate(-0.1,0,0))
         self.m_canvas.bind_all("<Up>", lambda x: self.represent_space(), add="+")
     
     def make_widgets(self):

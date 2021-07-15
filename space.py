@@ -1,7 +1,7 @@
 import math
 
 class Space:
-    '''this class represent the 3d space that will be projected on the canvas'''
+    '''this class represent the 3d space (euclidian norms , p=2) that will be projected on the canvas'''
     def __init__(self):
         #adding the dots array, dots will be x,y,z tuples
         self.dots={}
@@ -109,6 +109,20 @@ class Space:
             z=x*vector[2]/vector[0]
             self.dots[name].append((x,y,z,color))
     
+    def add_surf(self,x1,y1,z1,l,h,n1,n2,n3,name,color="black"):
+        '''to create surface give the orgin and final point, and the normal'''
+        # basics : ax + by +cz + z = 0
+        # we know that A(x2,y2,z2) and M(x,y,z) belongs to the surface and n(n1,n2,n3) the normal to the surface
+        # <=> AM(x1-x, y1-y, z1-z)⊥ N(n1,n2,n3) 
+        # <=> n1(x1-x) + n2(y1-y) + n3(z1-z) = 0
+        # <=> n1x + n2y + n3z + (-n1.x1 - n2.y1 - n3.z1) = 0
+        self.dots[name] = []
+        d = -n1*x1-n2*y1-n3*z1
+        for x in range(min(x1,x1+l),max(x1,x1+l)):
+            for y in range(min(y1,y1+h), max(y1,y1+h)):
+                z = z1+(-d-n2*y-n1*x)/n3
+                self.dots[name].append((x,y,z,color))
+
     def add_square(self, x1,y1,z1, x2,y2,z2, name, color="black"):
         '''this method add a square to our vectorial space'''
         # here on x axis , adding 1 dot/pixel, as it is a cube, 4 edeges go the same way, so we do it 4x, 
