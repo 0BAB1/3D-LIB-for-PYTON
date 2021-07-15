@@ -1,5 +1,5 @@
-fix the negative x problem
-add direct rotation
-add surfacs, colors, shaders
-direct shapes adding
-math function (bruh)
+fix the negative x problem ok
+add direct rotation ok
+add surfacs, colors, shaders TO FIX OMG
+direct shapes adding no
+math function (bruh) no
