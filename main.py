@@ -4,5 +4,5 @@ from space import Space
 #basic use : create a space and an application
 space = Space()
 application = App(space)
-space.add_square(0,0,0,100,100,150,"square1", "green")
+space.add_square(-10,-10,-10,-100,-100,100,"square1", "green")
 application.mainloop()

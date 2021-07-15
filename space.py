@@ -117,7 +117,7 @@ class Space:
         # then in Y=y1 / Z=z2
         # and finally on Y=y2 and Z=z2
         self.dots[name] = []
-        for i in range(x1, x2):
+        for i in range(min(x1,x2), max(x1,x2)):
             #Y=y1 Z=1
             self.dots[name].append((i,y1,z1,color))
             #Y=y2 Z=z1
@@ -128,7 +128,7 @@ class Space:
             self.dots[name].append((i,y2,z2,color))
         
         #we now proceed to do the same on Y and Z
-        for i in range(y1, y2):
+        for i in range(min(y1,y2), max(y1,y2)):
             #X=x1 Z=z1
             self.dots[name].append((x1,i,z1,color))
             #X=x2 Z=z1
@@ -138,7 +138,7 @@ class Space:
             #X=x2 Z=z2
             self.dots[name].append((x2,i,z2,color))
 
-        for i in range(z1, z2):
+        for i in range(min(z1,z2), max(z1,z2)):
             #X=x1 Y=y1
             self.dots[name].append((x1,y1,i,color))
             #X=x2 Y=y1
