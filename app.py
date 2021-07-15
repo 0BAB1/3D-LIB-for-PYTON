@@ -12,10 +12,17 @@ class App (tk.Tk):
         self.space = space
         #represent the space
         self.make_widgets()
+        #binds
+        self.m_canvas.bind_all("<Right>", lambda x: self.space.rotate(0.1,0,0), add="+")
+        self.m_canvas.bind_all("<Right>", lambda x: self.represent_space(), add="+")
+        self.m_canvas.bind_all("<Down>", lambda x: self.space.rotate(0,0,0.1))
+        self.m_canvas.bind_all("<Down>", lambda x: self.represent_space(), add="+")
+        self.m_canvas.bind_all("<Up>", lambda x: self.space.rotate(0,0.1,0))
+        self.m_canvas.bind_all("<Up>", lambda x: self.represent_space(), add="+")
     
     def make_widgets(self):
         '''create a test canvas'''
-        self.m_canvas = tk.Canvas(width=720, height=480, background="gray")
+        self.m_canvas = tk.Canvas(width=720, height=480, background="white")
         self.m_canvas.pack()
 
     def add_dot(self, x, y, color="black"):
@@ -32,11 +39,12 @@ class App (tk.Tk):
 
     def represent_space(self):
         '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
-        self.reset()
+        self.reset() #get rid of dots in the canvas
         #structure of space.dots:
         #
         # {"name" : [(x,y,z,color) , (x,y,z,color) , ...] , ...}
         #
+        # -- project dots on the canvas --
         for name, shape in self.space.dots.items():
             #as the dot is projected, only x and y coords wil be used
             for dot in shape:
