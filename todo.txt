@@ -1,9 +1,8 @@
 fix the negative x problem ok
 add direct rotation ok
 DOTS TO TRIANGLES work in progress
+    make the add_surf code shorter
     triangles rotation
-    triangles representation
-    making triangles
 direct shapes adding no
 math function (bruh) no
 rework origin no
