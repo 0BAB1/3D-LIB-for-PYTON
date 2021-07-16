@@ -9,6 +9,7 @@ class App (tk.Tk):
         self.resizable(False, False)
         #array containing dots on the screen
         self.dots = []
+        self.triangles = []
         self.space = space
         #represent the space
         self.make_widgets()
@@ -38,6 +39,9 @@ class App (tk.Tk):
         for dot in self.dots:
             self.m_canvas.delete(dot)
         self.dots = []
+        for triangle in self.triangles:
+            self.m_canvas.delete(triangle)
+        self.triangles = []
 
     def represent_space(self):
         '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
@@ -51,6 +55,14 @@ class App (tk.Tk):
             #as the dot is projected, only x and y coords wil be used
             for dot in shape:
                 self.add_dot(dot[0], dot[1], dot[3])
+        
+        for name, triangles in self.space.triangles.items():
+            #memo : structure : {"name" : [(color, (x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of triangle, which is a tuple of of dots + a color
+            for triangle in triangles: 
+                # triangles : [ (color,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
+                #  ^^list of triangles    ^^this is triangle 1     ^^ this is triangle 2    .. etc
+                print(triangles)
+                self.triangles.append(self.m_canvas.create_polygon(triangle[1][0]+720/2,triangle[1][1]+480/2,triangle[2][0]+720/2,triangle[2][1]+480/2,triangle[3][0]+720/2,triangle[3][1]+480/2))#and as always, only a projection so only x and y are taken, color last
             
         for dot in self.space.origin_dots:
             self.add_dot(dot[0], dot[1], "red")

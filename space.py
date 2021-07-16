@@ -6,13 +6,14 @@ def scal(v1,v2):
     return(v1[1]*v2[2]-v1[2]*v2[1],v1[2]*v2[0]-v1[0]*v2[2],v1[0]*v2[1]-v1[1]*v2[0])
 
 class Space:
-    '''this class represent the 3d space (euclidian norms , p=2) that will be projected on the canvas'''
+    '''this class represent the 3d space (euclidian norms) that will be projected on the canvas'''
     def __init__(self):
         #adding the dots array, dots will be x,y,z tuples
-        self.dots={}
+        self.dots={} #structure : {"name : [(color,x,y,z),(....)]"}
         self.origin_dots=[] #origin dots are set apart from other ones so we can change colors later on
         self.origin()
         self.rotations = (0,0,0) #to keep track of all rotations for later-added shapes (x,y,z)
+        self.triangles={} #structure : {"name" : [(color, (xyz),(xyz),(xzy) ),( (xyz),(xyz),(xyz) )]} or, an array of triangle, which is a tuple of of dots + a color
     
     def origin(self):
         '''this function will draw the main origin at 0,0,0 into the space'''
@@ -24,6 +25,7 @@ class Space:
     
     def del_shape(self, name):
         self.dots.pop(name)
+        self.triangles.pop(name)
 
     def rotate(self,x,y,z):
         '''to rotate every shapes around X0, Y0 and Z0 axis'''
@@ -109,41 +111,39 @@ class Space:
             z=x*vector[2]/vector[0]
             self.dots[name].append((x,y,z,color))
 
+    def add_surf(self, x1,y1,z1 ,x2,y2,z2 ,x3,y3,z3, name, color="black"):
+        '''create a surface with 2 triangles , the first dot is the ORIGIN of your surface, the main diagonal wiil start from here'''
+        self.triangles[name] = [] #memo : structure : {"name" : [(color, (x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of triangle, which is a tuple of of dots + a color
+        #a surface is two triangles
+        self.triangles[name].append((color,(x1,y1,z1),(x2,y2,z2),(x3,y3,z3)))#first triangle
+        #we need to determine our dot2-dot3 middle, this will later be shrter but for comprehension issues ... well its like that
+        middlex = min(x2,x3) + (max(x2,x3)-min(x2,x3))/2
+        middley = min(y2,y3) + (max(y2,y3)-min(y2,y3))/2
+        middlez = min(z2,z3) + (max(z2,z3)-min(z2,z3))/2
+        if x1 < middlex:
+            x4 = x1 + 2*(middlex-x1)
+        elif x1 > middlex:
+            x4 = x1 - 2*(middlex-x1)
+        else : #if we want to create a line
+            x4 = x1
+        
+        if y1 < middley:
+            y4 = y1 + 2*(middley-y1)
+        elif y1 > middlex:
+            y4 = y1 - 2*(middley-y1)
+        else : #if we want to create a line
+            y4 = y1
+
+        if z1 < middlez:
+            z4 = z1 + 2*(middlez-z1)
+        elif y1 > middlex:
+            z4 = z1 - 2*(middlez-z1)
+        else : #if we want to create a line
+            z4 = z1
+        
+        self.triangles[name].append((color,(x4,y4,z4),(x2,y2,z2),(x3,y3,z3)))#second triangle
+
     def add_square(self, x1,y1,z1, x2,y2,z2, name, color="black"):
         '''this method add a square to our vectorial space'''
-        # here on x axis , adding 1 dot/pixel, as it is a cube, 4 edeges go the same way, so we do it 4x, 
-        # in Y=y1 / Z=z1 ,
-        # then in Y=y2 / Z=z1,
-        # then in Y=y1 / Z=z2
-        # and finally on Y=y2 and Z=z2
-        self.dots[name] = []
-        for i in range(min(x1,x2), max(x1,x2)):
-            #Y=y1 Z=1
-            self.dots[name].append((i,y1,z1,color))
-            #Y=y2 Z=z1
-            self.dots[name].append((i,y2,z1,color))
-            #Y=y1 Z=z2
-            self.dots[name].append((i,y1,z2,color))
-            #Y=y2 Z=z2
-            self.dots[name].append((i,y2,z2,color))
-        
-        #we now proceed to do the same on Y and Z
-        for i in range(min(y1,y2), max(y1,y2)):
-            #X=x1 Z=z1
-            self.dots[name].append((x1,i,z1,color))
-            #X=x2 Z=z1
-            self.dots[name].append((x2,i,z1,color))
-            #X=x1 Z=z2
-            self.dots[name].append((x1,i,z2,color))
-            #X=x2 Z=z2
-            self.dots[name].append((x2,i,z2,color))
-
-        for i in range(min(z1,z2), max(z1,z2)):
-            #X=x1 Y=y1
-            self.dots[name].append((x1,y1,i,color))
-            #X=x2 Y=y1
-            self.dots[name].append((x2,y1,i,color))
-            #X=x1 Y=y2
-            self.dots[name].append((x1,y2,i,color))
-            #X=x2 Y=y2
-            self.dots[name].append((x2,y2,i,color))
+        #we have to re-think that
+        pass
