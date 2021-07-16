@@ -108,23 +108,6 @@ class Space:
             y=x*vector[1]/vector[0]
             z=x*vector[2]/vector[0]
             self.dots[name].append((x,y,z,color))
-    
-    def add_surf(self,x1,y1,z1,x2,y2,z2,x3,y3,z3,name,color="black"):
-        '''to create surface give the orgin and final point, and the normal'''
-
-        AB = (x2-x1,y2-y1,z2-z1)
-        AC = (x3-x1,y3-y1,z3-z1)
-
-        N=scal(AB,AC)
-
-        if not N == (0,0,0):
-            self.dots[name] = []
-            d = -N[0]*x1-N[1]*y1-N[2]*z1
-            if not N[2] == 0 :  #f(x,y) = z =>  n[2] belong to R*
-                for x in range(min(x1,x2),max(x1,x2)):
-                    for y in range(min(y1,y2), max(y1,y2)):
-                        z = z1 (-x*N[0]-y*N[1]-d)/N[2]
-                        self.dots[name].append((x,y,z,color))
 
     def add_square(self, x1,y1,z1, x2,y2,z2, name, color="black"):
         '''this method add a square to our vectorial space'''

@@ -1,5 +1,5 @@
 fix the negative x problem ok
 add direct rotation ok
-add surfacs, colors, shaders TO FIX OMG
+DOTS TO TRIANGLES
 direct shapes adding no
 math function (bruh) no
