@@ -4,3 +4,4 @@ this python script will allow you to get basic 3d prewiews on a python canvas or
 
 # How to use it ?
 
+work in progress
