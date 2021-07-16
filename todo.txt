@@ -3,3 +3,4 @@ add direct rotation ok
 DOTS TO TRIANGLES
 direct shapes adding no
 math function (bruh) no
+rework origin no
