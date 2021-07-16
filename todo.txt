@@ -3,6 +3,7 @@ add direct rotation ok
 DOTS TO TRIANGLES work in progress
     make the add_surf code shorter
     triangles rotation
+    make the rotation code shorter
 direct shapes adding no
 math function (bruh) no
 rework origin no
