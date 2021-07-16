@@ -13,7 +13,7 @@ class Space:
         self.origin_dots=[] #origin dots are set apart from other ones so we can change colors later on
         self.origin()
         self.rotations = (0,0,0) #to keep track of all rotations for later-added shapes (x,y,z)
-        self.triangles={} #structure : {"name" : [(color, (xyz),(xyz),(xzy) ),( (xyz),(xyz),(xyz) )]} or, an array of triangle, which is a tuple of of dots + a color
+        self.meshes={} #structure : {"name" : [(color, (xyz),(xyz),(xzy) ),( (xyz),(xyz),(xyz) )]} or, an array of triangle, which is a tuple of of dots + a color
     
     def origin(self):
         '''this function will draw the main origin at 0,0,0 into the space'''
@@ -31,14 +31,14 @@ class Space:
         '''to rotate every shapes around X0, Y0 and Z0 axis'''
         self.rotations = (self.rotations[0]+x,self.rotations[1]+y,self.rotations[2]+z)
         rotationY =[
-            [math.cos(y),    0,    math.sin(y)],
-            [0              ,1              ,0],
-            [-math.sin(y),  0,     math.cos(y)]
+            [math.cos(y),0,math.sin(y)],
+            [0 ,1,0],
+            [-math.sin(y),0,math.cos(y)]
         ]
         rotationX =[
-            [1,           0,                  0],
-            [0,     math.cos(x),   -math.sin(x)],
-            [0,     math.sin(x),    math.cos(x)]
+            [1,0,0],
+            [0,math.cos(x),-math.sin(x)],
+            [0,math.sin(x),math.cos(x)]
         ]
         rotationZ =[
             [math.cos(z),-math.sin(z),0],
@@ -74,6 +74,13 @@ class Space:
                     new_z=rotationY[2][0]*self.dots[name][i][0]+rotationY[2][1]*self.dots[name][i][1]+rotationY[2][2]*self.dots[name][i][2]
                     #apply new coords to dots
                     self.dots[name][i] = (new_x, self.dots[name][i][1], new_z, self.dots[name][i][3])
+            
+            for name, mesh in self.meshes.items():
+                #rotation for triangles in mesh
+                # memo : mesh : [ (color,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
+                #      ^^list of triangles    ^^this is triangle 1          ^^ this is triangle 2    .. etc
+                for i in range(len(mesh)):
+                    pass
             
             #this time for origin dots (to improve btw)
             for i in range(len(self.origin_dots)):
@@ -113,9 +120,9 @@ class Space:
 
     def add_surf(self, x1,y1,z1 ,x2,y2,z2 ,x3,y3,z3, name, color="black"):
         '''create a surface with 2 triangles , the first dot is the ORIGIN of your surface, the main diagonal wiil start from here'''
-        self.triangles[name] = [] #memo : structure : {"name" : [(color, (x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of triangle, which is a tuple of of dots + a color
+        self.meshes[name] = [] #memo : structure : {"name" : [(color, (x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of triangle, which is a tuple of of dots + a color
         #a surface is two triangles
-        self.triangles[name].append((color,(x1,y1,z1),(x2,y2,z2),(x3,y3,z3)))#first triangle
+        self.meshes[name].append((color,(x1,y1,z1),(x2,y2,z2),(x3,y3,z3)))#first triangle
         #we need to determine our dot2-dot3 middle, this will later be shrter but for comprehension issues ... well its like that
         middlex = min(x2,x3) + (max(x2,x3)-min(x2,x3))/2
         middley = min(y2,y3) + (max(y2,y3)-min(y2,y3))/2
@@ -141,7 +148,7 @@ class Space:
         else : #if we want to create a line
             z4 = z1
         
-        self.triangles[name].append((color,(x4,y4,z4),(x2,y2,z2),(x3,y3,z3)))#second triangle
+        self.meshes[name].append((color,(x4,y4,z4),(x2,y2,z2),(x3,y3,z3)))#second triangle
 
     def add_square(self, x1,y1,z1, x2,y2,z2, name, color="black"):
         '''this method add a square to our vectorial space'''
