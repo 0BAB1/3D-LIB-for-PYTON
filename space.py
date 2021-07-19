@@ -1,9 +1,40 @@
 import math
 
-def scal(v1,v2):
-    '''takes two tuples and do u^v, return a tuple'''
-    print(v1[1]*v2[2]-v1[2]*v2[1],v1[2]*v2[0]-v1[0]*v2[2],v1[0]*v2[1]-v1[1]*v2[0])
-    return(v1[1]*v2[2]-v1[2]*v2[1],v1[2]*v2[0]-v1[0]*v2[2],v1[0]*v2[1]-v1[1]*v2[0])
+def rotation(vector,x,y,z):
+    '''take a vector (or dot coords) and rotate it following specied x,y,and z, returns a tuple with new coords'''
+    #vect = [x,y,z]
+    vect = [vector[0],vector[1],vector[2]]#we have to convert to an array as tuples doesn't support direct assignements (read only)
+    rotationX =[
+        [1,0,0],
+        [0,math.cos(x),-math.sin(x)],
+        [0,math.sin(x),math.cos(x)]
+    ]
+    rotationY =[
+            [math.cos(y),0,math.sin(y)],
+            [0 ,1,0],
+            [-math.sin(y),0,math.cos(y)]
+        ]
+    rotationZ =[
+        [math.cos(z),-math.sin(z),0],
+        [math.sin(z),math.cos(z),0],
+        [0,0,1]
+    ]
+
+    if not x==0:
+        #x = 1*x <=> vect[0] = vect[0]
+        vect[1]=rotationX[1][0]*vect[0]+rotationX[1][1]*vect[1]+rotationX[1][2]*vect[2]
+        vect[2]=rotationX[2][0]*vect[0]+rotationX[2][1]*vect[1]+rotationX[2][2]*vect[2]
+    if not y==0:
+        #x = 1*x <=> vect[0] = vect[0]
+        vect[0]=rotationY[0][0]*vect[0]+rotationY[0][1]*vect[1]+rotationY[0][2]*vect[2]
+        vect[2]=rotationY[2][0]*vect[0]+rotationY[2][1]*vect[1]+rotationY[2][2]*vect[2]
+    if not z==0:
+        #x = 1*x <=> vect[0] = vect[0]
+        vect[0]=rotationZ[0][0]*vect[0]+rotationZ[0][1]*vect[1]+rotationZ[0][2]*vect[2]
+        vect[1]=rotationZ[1][0]*vect[0]+rotationZ[1][1]*vect[1]+rotationZ[1][2]*vect[2]
+
+    return (vect[0],vect[1],vect[2])
+
 
 class Space:
     '''this class represent the 3d space (euclidian norms) that will be projected on the canvas'''
