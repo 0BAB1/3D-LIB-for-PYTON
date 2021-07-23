@@ -22,6 +22,22 @@ class App (tk.Tk):
         self.m_canvas.bind_all("<Down>", lambda x: self.represent_space(), add="+")
         self.m_canvas.bind_all("<Up>", lambda x: self.space.rotate(0.1,0,0))
         self.m_canvas.bind_all("<Up>", lambda x: self.represent_space(), add="+")
+
+        #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
+        self.sensitivity = 1
+        self.x = 0
+        self.y = 0
+        self.m_canvas.bind_all("<Motion>", self.motion)
+
+    def motion(self, event):
+        x, y = event.x , event.y
+        #make delta
+        Dx = self.x-x
+        Dy = self.y-y
+        #update new x and y in app
+        self.x, self.y = x, y
+        self.space.rotate(-Dy/(100*self.sensitivity),Dx/(100*self.sensitivity),0)
+        self.represent_space()
     
     def make_widgets(self):
         '''create a test canvas'''
