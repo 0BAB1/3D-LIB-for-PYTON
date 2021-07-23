@@ -10,10 +10,10 @@ def rotation(vector,x,y,z):
         [0,math.sin(x),math.cos(x)]
     ]
     rotationY =[
-            [math.cos(y),0,math.sin(y)],
-            [0 ,1,0],
-            [-math.sin(y),0,math.cos(y)]
-        ]
+        [math.cos(y),0,math.sin(y)],
+        [0 ,1,0],
+        [-math.sin(y),0,math.cos(y)]
+    ]
     rotationZ =[
         [math.cos(z),-math.sin(z),0],
         [math.sin(z),math.cos(z),0],
@@ -38,7 +38,7 @@ def rotation(vector,x,y,z):
         #x = 1*x <=> vect[0] = vect[0]
         vect[0]=rotationZ[0][0]*vect[0]+rotationZ[0][1]*vect[1]+rotationZ[0][2]*vect[2]
         vect[1]=rotationZ[1][0]*vect[0]+rotationZ[1][1]*vect[1]+rotationZ[1][2]*vect[2]
-
+    print(vect)
     return (vect[0],vect[1],vect[2])
 
 
@@ -71,7 +71,10 @@ class Space:
             for i in range(len(value)):
                 newCoords = rotation((self.dots[name][i][0],self.dots[name][i][1],self.dots[name][i][2]),x,y,z)
                 self.dots[name][i]=(newCoords[0],newCoords[1],newCoords[2],self.dots[name][i][3])
-        
+
+        # for dot in self.origin_dots:
+        #     dot = rotation(dot,x,y,z)
+
         for name, mesh in self.meshes.items():
             #rotation for triangles in mesh
             # memo : mesh : [ (color,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
