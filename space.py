@@ -1,47 +1,5 @@
 import math
 
-def rotation(vector,x,y,z):
-    '''take a vector (or dot coords) and rotate it following specied x,y,and z, returns a tuple with new coords'''
-    #vect = [x,y,z]
-    vect = [vector[0],vector[1],vector[2]]#we have to convert to an array as tuples doesn't support direct assignements (read only)
-    rotationX =[
-        [1,0,0],
-        [0,math.cos(x),-math.sin(x)],
-        [0,math.sin(x),math.cos(x)]
-    ]
-    rotationY =[
-        [math.cos(y),0,math.sin(y)],
-        [0 ,1,0],
-        [-math.sin(y),0,math.cos(y)]
-    ]
-    rotationZ =[
-        [math.cos(z),-math.sin(z),0],
-        [math.sin(z),math.cos(z),0],
-        [0,0,1]
-    ]
-
-    # we are doing a base change :
-    # syntax // <newcoord> = <matrixCoord>*<oldCoord> <-- repeat for x y and z
-    # NewX = 00*0(Old x) + 01*1(Old y) + 02*2(Old z)
-    # NewY = 10*0 + 11*1 + 12*2
-    # NewZ = 20*0 + 21*1 + 22*2
-
-    if not x==0:
-        #x = 1*x <=> vect[0] = vect[0]
-        vect[1]=rotationX[1][0]*vect[0]+rotationX[1][1]*vect[1]+rotationX[1][2]*vect[2]
-        vect[2]=rotationX[2][0]*vect[0]+rotationX[2][1]*vect[1]+rotationX[2][2]*vect[2]
-    if not y==0:
-        #x = 1*x <=> vect[0] = vect[0]
-        vect[0]=rotationY[0][0]*vect[0]+rotationY[0][1]*vect[1]+rotationY[0][2]*vect[2]
-        vect[2]=rotationY[2][0]*vect[0]+rotationY[2][1]*vect[1]+rotationY[2][2]*vect[2]
-    if not z==0:
-        #x = 1*x <=> vect[0] = vect[0]
-        vect[0]=rotationZ[0][0]*vect[0]+rotationZ[0][1]*vect[1]+rotationZ[0][2]*vect[2]
-        vect[1]=rotationZ[1][0]*vect[0]+rotationZ[1][1]*vect[1]+rotationZ[1][2]*vect[2]
-    print(vect)
-    return (vect[0],vect[1],vect[2])
-
-
 class Space:
     '''this class represent the 3d space (euclidian norms) that will be projected on the canvas'''
     def __init__(self):
@@ -51,6 +9,23 @@ class Space:
         self.origin()
         self.rotations = (0,0,0) #to keep track of all rotations for later-added shapes (x,y,z)
         self.meshes={} #structure : {"name" : [(color, (xyz),(xyz),(xzy) ),( (xyz),(xyz),(xyz) )]} or, an array of triangle, which is a tuple of of dots + a color
+
+    def rotation(self,x,y,z):
+        rotationX =[
+            [1,0,0],
+            [0,math.cos(x),-math.sin(x)],
+            [0,math.sin(x),math.cos(x)]
+        ]
+        rotationY =[
+            [math.cos(y),0,math.sin(y)],
+            [0 ,1,0],
+            [-math.sin(y),0,math.cos(y)]
+        ]
+        rotationZ =[
+            [math.cos(z),-math.sin(z),0],
+            [math.sin(z),math.cos(z),0],
+            [0,0,1]
+        ]
     
     def origin(self):
         '''this function will draw the main origin at 0,0,0 into the space'''
@@ -69,8 +44,7 @@ class Space:
         for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
         #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
             for i in range(len(value)):
-                newCoords = rotation((self.dots[name][i][0],self.dots[name][i][1],self.dots[name][i][2]),x,y,z)
-                self.dots[name][i]=(newCoords[0],newCoords[1],newCoords[2],self.dots[name][i][3])
+                pass
 
         # for dot in self.origin_dots:
         #     dot = rotation(dot,x,y,z)

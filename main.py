@@ -4,5 +4,5 @@ from space import Space
 #basic use : create a space and an application
 space = Space()
 application = App(space)
-space.add_line(0,0,0 ,50,50,50,"surf1","black")
+space.add_line(0,0,0 ,50,0,0,"surf1","black")
 application.mainloop()
