@@ -24,7 +24,7 @@ class App (tk.Tk):
         self.m_canvas.bind_all("<Up>", lambda x: self.represent_space(), add="+")
 
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
-        self.sensitivity = 1
+        self.sensitivity = 0.4
         self.x = 0
         self.y = 0
         self.m_canvas.bind_all("<Motion>", self.motion)
@@ -36,7 +36,7 @@ class App (tk.Tk):
         Dy = self.y-y
         #update new x and y in app
         self.x, self.y = x, y
-        self.space.rotate(-Dy/(100*self.sensitivity),Dx/(100*self.sensitivity),0)
+        self.space.rotate(-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0)
         self.represent_space()
     
     def make_widgets(self):
