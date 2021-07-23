@@ -69,7 +69,7 @@ class Space:
         for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
         #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
             for i in range(len(value)):
-                newCoords = rotation((i[0],i[1],i[2]),x,y,z)
+                newCoords = rotation((self.dots[name][i][0],self.dots[name][i][1],self.dots[name][i][2]),x,y,z)
                 self.dots[name][i]=(newCoords[0],newCoords[1],newCoords[2],self.dots[name][i][3])
         
         for name, mesh in self.meshes.items():
