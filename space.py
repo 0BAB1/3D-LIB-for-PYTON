@@ -19,8 +19,23 @@ class Space:
             self.origin_dots.append((0,0,i))
     
     def del_shape(self, name):
-        self.dots.pop(name)
-        self.meshes.pop(name)
+        # spare code, please keep it there
+        # if name in self.meshes:
+        #     for mesh,value in self.meshes:
+        #         #for each mesh
+        #         for i in range(len(name)):#we look for a match with name on the fists chars
+        #             if name[i] == mesh[i]:
+        #                 found = True
+        #             else:
+        #                 found = False
+        #         if found:#if it matched , we look for a "-" in the name, if so, the two meshes were associated to the same shape, so we delet it
+        #             if "-" in mesh:
+        #    
+        #             self.meshes.pop(mesh)
+        if name in self.meshes:
+            self.meshes.pop(name)
+        if name in self.dots:
+            self.dots.pop(name)
 
     def rotate(self,x,y,z):
         '''to rotate every shape around x y or / and z'''
@@ -121,6 +136,9 @@ class Space:
     def add_line(self,x1,y1,z1, x2,y2,z2,name,color="black"):
         '''to add a simple line and create custom shapes'''
         #each point has a position in origin1 and a color attribute, those are associated with their name (ids)
+
+        if "-" in name:
+            return print("please do not name your shapes with '-'")
         self.dots[name] = []
 
         vector=[
@@ -168,5 +186,5 @@ class Space:
 
     def add_square(self, x1,y1,z1, x2,y2,z2, name, color="black"):
         '''this method add a square to our vectorial space'''
-        #we have to re-think that
+        #create 6 surfaces
         pass

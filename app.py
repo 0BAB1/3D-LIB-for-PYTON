@@ -55,7 +55,7 @@ class App (tk.Tk):
             for triangle in mesh: 
                 # mesh : [ (color,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
                 #  ^^list of triangles    ^^this is triangle 1     ^^ this is triangle 2    .. etc
-                self.meshes.append(self.m_canvas.create_polygon(triangle[1][0]+720/2,triangle[1][1]+480/2,triangle[2][0]+720/2,triangle[2][1]+480/2,triangle[3][0]+720/2,triangle[3][1]+480/2,fill=triangle[0]))
+                self.meshes.append(self.m_canvas.create_polygon(triangle[1][0]+720/2,triangle[1][1]+480/2,triangle[2][0]+720/2,triangle[2][1]+480/2,triangle[3][0]+720/2,triangle[3][1]+480/2,fill=triangle[0],outline="grey"))
                 #and as always, only a projection so only x and y are taken, color last
 
         #structure of space.dots:
