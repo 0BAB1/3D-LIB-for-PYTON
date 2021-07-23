@@ -154,7 +154,8 @@ class Space:
 
     def add_surf(self, x1,y1,z1 ,x2,y2,z2 ,x3,y3,z3, name, color="black"):
         '''create a surface with 2 triangles , the first dot is the ORIGIN of your surface, the main diagonal wiil start from here'''
-        self.meshes[name] = [] #memo : structure : {"name" : [[color, (x,y,z),(x,y,z),(x,z,y) ],[clolor, (xyz),(xyz),(xyz) ] etc]} or, an array of triangle, which is an array of dots + a color
+        if not name in self.meshes:
+            self.meshes[name] = [] #memo : structure : {"name" : [[color, (x,y,z),(x,y,z),(x,z,y) ],[clolor, (xyz),(xyz),(xyz) ] etc]} or, an array of triangle, which is an array of dots + a color
         #a surface is two triangles
         self.meshes[name].append([color,(x1,y1,z1),(x2,y2,z2),(x3,y3,z3)])#first triangle
         #we need to determine our dot2-dot3 middle, this will later be shrter but for comprehension issues ... well its like that
