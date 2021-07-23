@@ -4,7 +4,7 @@ from space import Space
 #basic use : create a space and an application
 space = Space()
 application = App(space)
-space.add_line(0,0,0 ,50,0,0,"surf1","black")
-space.add_surf(10,10,10,50,50,50,100,50,200,"surf1", "blue")
+space.add_line(0,0,0 ,100,100,100,"surf1","green")
+space.add_surf(0,0,0,50,0,0,0,50,0,"surf1", "blue")
 application.represent_space()
 application.mainloop()
