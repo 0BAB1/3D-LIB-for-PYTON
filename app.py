@@ -13,18 +13,8 @@ class App (tk.Tk):
         self.space = space
         #represent the space
         self.make_widgets()
-        #binds
-        self.m_canvas.bind_all("<Right>", lambda x: self.space.rotate(0,0.1,0), add="+")
-        self.m_canvas.bind_all("<Right>", lambda x: self.represent_space(), add="+")
-        self.m_canvas.bind_all("<Left>", lambda x: self.space.rotate(0,-0.1,0), add="+")
-        self.m_canvas.bind_all("<Left>", lambda x: self.represent_space(), add="+")
-        self.m_canvas.bind_all("<Down>", lambda x: self.space.rotate(-0.1,0,0))
-        self.m_canvas.bind_all("<Down>", lambda x: self.represent_space(), add="+")
-        self.m_canvas.bind_all("<Up>", lambda x: self.space.rotate(0.1,0,0))
-        self.m_canvas.bind_all("<Up>", lambda x: self.represent_space(), add="+")
-
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
-        self.sensitivity = 0.4
+        self.sensitivity = 0.4 #mouse sens.
         self.x = 0
         self.y = 0
         self.m_canvas.bind_all("<Motion>", self.motion)

@@ -7,7 +7,6 @@ class Space:
         self.dots={} #structure : {"name : [(color,x,y,z),(....)]"}
         self.origin_dots=[] #origin dots are set apart from other ones so we can change colors later on
         self.origin()
-        self.rotations = (0,0,0) #to keep track of all rotations for later-added shapes (x,y,z)
         self.meshes={} #structure : {"name" : [(color, (xyz),(xyz),(xzy) ),( color, (xyz),(xyz),(xyz) )]} or, an array of triangle, which is a tuple of of dots + a color
     
     def origin(self):
