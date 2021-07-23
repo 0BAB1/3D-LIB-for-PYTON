@@ -9,23 +9,6 @@ class Space:
         self.origin()
         self.rotations = (0,0,0) #to keep track of all rotations for later-added shapes (x,y,z)
         self.meshes={} #structure : {"name" : [(color, (xyz),(xyz),(xzy) ),( (xyz),(xyz),(xyz) )]} or, an array of triangle, which is a tuple of of dots + a color
-
-    def rotation(self,x,y,z):
-        rotationX =[
-            [1,0,0],
-            [0,math.cos(x),-math.sin(x)],
-            [0,math.sin(x),math.cos(x)]
-        ]
-        rotationY =[
-            [math.cos(y),0,math.sin(y)],
-            [0 ,1,0],
-            [-math.sin(y),0,math.cos(y)]
-        ]
-        rotationZ =[
-            [math.cos(z),-math.sin(z),0],
-            [math.sin(z),math.cos(z),0],
-            [0,0,1]
-        ]
     
     def origin(self):
         '''this function will draw the main origin at 0,0,0 into the space'''
@@ -41,6 +24,22 @@ class Space:
 
     def rotate(self,x,y,z):
         '''to rotate every shape around x y or / and z'''
+        rotationX =[
+            [1,0,0],
+            [0,math.cos(x),-math.sin(x)],
+            [0,math.sin(x),math.cos(x)]
+        ]
+        rotationY =[
+            [math.cos(y),0,math.sin(y)],
+            [0 ,1,0],
+            [-math.sin(y),0,math.cos(y)]
+        ]
+        rotationZ =[
+            [math.cos(z),-math.sin(z),0],
+            [math.sin(z),math.cos(z),0],
+            [0,0,1]
+        ]
+
         for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
         #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
             for i in range(len(value)):
