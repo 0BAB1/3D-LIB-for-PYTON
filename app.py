@@ -17,7 +17,11 @@ class App (tk.Tk):
         self.sensitivity = 0.4 #mouse sens.
         self.x = 0
         self.y = 0
-        self.m_canvas.bind_all("<Motion>", self.motion)
+        self.m_canvas.bind_all("<B1-Motion>", self.motion)
+        self.m_canvas.bind_all("<Motion>", self.refresh_mouse_position)
+
+    def refresh_mouse_position(self, event):
+        self.x, self.y = event.x, event.y
 
     def motion(self, event):
         x, y = event.x , event.y
@@ -26,7 +30,7 @@ class App (tk.Tk):
         Dy = self.y-y
         #update new x and y in app
         self.x, self.y = x, y
-        self.space.rotate(-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0)
+        self.space.rotate(self.sensitivity*Dy/100,-self.sensitivity*Dx/100,0)
         self.represent_space()
     
     def make_widgets(self):
