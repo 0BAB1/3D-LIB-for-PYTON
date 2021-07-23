@@ -1,9 +1,7 @@
-fix the negative x problem ok
-add direct rotation ok
-DOTS TO TRIANGLES work in progress
-    make the add_surf code shorter
-    triangles rotation
-    make the rotation code shorter
-direct shapes adding no
-math function (bruh) no
-rework origin no
+HELLO, HERE IS MY TODO LIST
+
+make the add_surf code shorter (reliable math to buiild meshes for all shapes)
+make the rotation code shorter
+direct shapes adding
+math function (bruh)
+rework origin
