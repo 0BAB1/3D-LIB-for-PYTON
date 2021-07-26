@@ -1,4 +1,4 @@
-import math
+from math import sin, cos
 
 class Space:
     '''this class represent the 3d space (euclidian norms) that will be projected on the canvas'''
@@ -44,7 +44,18 @@ class Space:
 
     def rotation(self, x, y, z, Rx, Ry, Rz):
         '''mainly used by rotation method, gice it a point and an angle, returns a tuple with new coords, used to siplify code'''
-        
+
+        rotation_matrix =[
+            [cos(Ry)*cos(Rz), sin(Rx)*sin(Ry)*cos(Rz)+cos(Rx)*sin(Rz), -cos(Rx)*sin(Ry)*cos(Rz)+sin(Rx)*sin(Rz)],
+            [-cos(Ry)*sin(Rz), -sin(Rx)*sin(Ry)*sin(Rz)+cos(Rx)*cos(Rz), cos(Rx)*sin(Ry)*sin(Rz)+sin(Rx)*cos(Rz)],
+            [sin(Ry), -sin(Rx)*cos(Ry), cos(Rx)*cos(Ry)]
+        ]
+
+        new_x = x*rotation_matrix[0][0] + y*rotation_matrix[0][1] + z*rotation_matrix[0][2]
+        new_y = x*rotation_matrix[1][0] + y*rotation_matrix[1][1] + z*rotation_matrix[1][2]
+        new_z = x*rotation_matrix[2][0] + y*rotation_matrix[2][1] + z*rotation_matrix[2][2]
+
+        return (new_x, new_y, new_z)
         
     def rotate(self,x,y,z):
         '''to rotate every shape around x y or / and z'''
@@ -55,96 +66,22 @@ class Space:
         self.rotations["x"] += x 
         self.rotations["y"] += y
         self.rotations["z"] += z
-        
-        rotationX =[
-            [1,0,0],
-            [0,math.cos(x),-math.sin(x)],
-            [0,math.sin(x),math.cos(x)]
-        ]
-        rotationY =[
-            [math.cos(y),0,math.sin(y)],
-            [0 ,1,0],
-            [-math.sin(y),0,math.cos(y)]
-        ]
-        rotationZ =[
-            [math.cos(z),-math.sin(z),0],
-            [math.sin(z),math.cos(z),0],
-            [0,0,1]
-        ]
 
-        if not x==0:
-            for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
-            #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
-                for i in range(len(value)):
-                    new_y=rotationX[1][0]*self.dots[name][i][0]+rotationX[1][1]*self.dots[name][i][1]+rotationX[1][2]*self.dots[name][i][2]
-                    new_z=rotationX[2][0]*self.dots[name][i][0]+rotationX[2][1]*self.dots[name][i][1]+rotationX[2][2]*self.dots[name][i][2]
+        for i in range(len(self.origin_dots)):
+            self.origin_dots[i] = self.rotation(self.origin_dots[i][0],self.origin_dots[i][1],self.origin_dots[i][2],x,y,z)
 
-                    self.dots[name][i] = (self.dots[name][i][0], new_y, new_z, self.dots[name][i][3]) #the new x is the old one
+        for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
+        #     #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
+            for i in range(len(value)):
+                new_dot = self.rotation(self.dots[name][i][0],self.dots[name][i][1],self.dots[name][i][2],x,y,z)
+                self.dots[name][i] = (new_dot[0],new_dot[1],new_dot[2],self.dots[name][i][3]) #the new x is the old one
 
-            for i in range(len(self.origin_dots)):
-                #   this line is optional as it is the rotation axis new_x=rotationX[0][0]*self.origin_dots[i][0]+rotationX[0][1]*self.origin_dots[i][1]+rotationX[0][2]*self.origin_dots[i][2]
-                new_y=rotationX[1][0]*self.origin_dots[i][0]+rotationX[1][1]*self.origin_dots[i][1]+rotationX[1][2]*self.origin_dots[i][2]
-                new_z=rotationX[2][0]*self.origin_dots[i][0]+rotationX[2][1]*self.origin_dots[i][1]+rotationX[2][2]*self.origin_dots[i][2]
-                self.origin_dots[i] = (self.origin_dots[i][0], new_y, new_z) #the new x is the old one
-            
-            for name, mesh in self.meshes.items():
-                for i in range(len(mesh)): #i is a triangle, following this structure : [color,(x,y,z),(x,y,z),(x,y,z)]
-                    #a triangle as 3 dots (here j is a dot) :
-                    for j in range(1,len(self.meshes[name][i])):
-                        new_y = rotationX[1][0]*self.meshes[name][i][j][0] + rotationX[1][1]*self.meshes[name][i][j][1] + rotationX[1][2]*self.meshes[name][i][j][2]
-                        new_z = rotationX[2][0]*self.meshes[name][i][j][0] + rotationX[2][1]*self.meshes[name][i][j][1] + rotationX[2][2]*self.meshes[name][i][j][2]
-                        self.meshes[name][i][j] = (self.meshes[name][i][j][0], new_y, new_z)
-
-        
-        if not y==0:
-            for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
-            #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
-                for i in range(len(value)):
-                    # we are doing a base change :
-                    # syntax // <newcoord> = <matrixCoord>*<oldCoord> <-- repeat for x y and z
-                    # NewX = 00*0(Old x) + 01*1(Old y) + 02*2(Old z)
-                    # NewY = 10*0 + 11*1 + 12*2
-                    # NewZ = 20*0 + 21*1 + 22*2
-                    new_x=rotationY[0][0]*self.dots[name][i][0]+rotationY[0][1]*self.dots[name][i][1]+rotationY[0][2]*self.dots[name][i][2]
-                    new_z=rotationY[2][0]*self.dots[name][i][0]+rotationY[2][1]*self.dots[name][i][1]+rotationY[2][2]*self.dots[name][i][2]
-                    #apply new coords to dots
-                    self.dots[name][i] = (new_x, self.dots[name][i][1], new_z, self.dots[name][i][3])
-            
-            #this time for origin dots (to improve btw)
-            for i in range(len(self.origin_dots)):
-                new_x=rotationY[0][0]*self.origin_dots[i][0]+rotationY[0][1]*self.origin_dots[i][1]+rotationY[0][2]*self.origin_dots[i][2]
-                new_z=rotationY[2][0]*self.origin_dots[i][0]+rotationY[2][1]*self.origin_dots[i][1]+rotationY[2][2]*self.origin_dots[i][2]
-                self.origin_dots[i] = (new_x, self.origin_dots[i][1], new_z)
-
-            for name, mesh in self.meshes.items():
-                for i in range(len(mesh)): #i is a triangle, following this structure : [color,(x,y,z),(x,y,z),(x,y,z)]
-                    #a triangle as 3 dots (here j is a dot) :
-                    for j in range(1,len(self.meshes[name][i])):
-                        new_x = rotationY[0][0]*self.meshes[name][i][j][0] + rotationY[0][1]*self.meshes[name][i][j][1] + rotationY[0][2]*self.meshes[name][i][j][2]
-                        new_z = rotationY[2][0]*self.meshes[name][i][j][0] + rotationY[2][1]*self.meshes[name][i][j][1] + rotationY[2][2]*self.meshes[name][i][j][2]
-                        self.meshes[name][i][j] = (new_x, self.meshes[name][i][j][1], new_z)
-        
-        if not z==0:
-            for name, value in self.dots.items(): #here, a value is a group of point associated to a shape
-            #a value's structure : [(x,y,z,color) , (x,y,z,color), ...]
-                for i in range(len(value)):
-                    new_x=rotationZ[0][0]*self.dots[name][i][0]+rotationZ[0][1]*self.dots[name][i][1]+rotationZ[0][2]*self.dots[name][i][2]
-                    new_y=rotationZ[1][0]*self.dots[name][i][0]+rotationZ[1][1]*self.dots[name][i][1]+rotationZ[1][2]*self.dots[name][i][2]
-
-                    self.dots[name][i] = (new_x, new_y, self.dots[name][i][2], self.dots[name][i][3])
-            
-            for i in range(len(self.origin_dots)):
-                new_x=rotationZ[0][0]*self.origin_dots[i][0]+rotationZ[0][1]*self.origin_dots[i][1]+rotationZ[0][2]*self.origin_dots[i][2]
-                new_y=rotationZ[1][0]*self.origin_dots[i][0]+rotationZ[1][1]*self.origin_dots[i][1]+rotationZ[1][2]*self.origin_dots[i][2]
-                self.origin_dots[i] = (new_x, new_y, self.origin_dots[i][2])
-            
-            for name, mesh in self.meshes.items():
-                for i in range(len(mesh)): #i is a triangle, following this structure : [color,(x,y,z),(x,y,z),(x,y,z)]
-                    #a triangle as 3 dots (here j is a dot) :
-                    for j in range(1,len(self.meshes[name][i])):
-                        new_x = rotationZ[0][0]*self.meshes[name][i][j][0] + rotationZ[0][1]*self.meshes[name][i][j][1] + rotationZ[0][2]*self.meshes[name][i][j][2]
-                        new_y = rotationZ[1][0]*self.meshes[name][i][j][0] + rotationZ[1][1]*self.meshes[name][i][j][1] + rotationZ[1][2]*self.meshes[name][i][j][2]
-                        self.meshes[name][i][j] = (new_x, new_y, self.meshes[name][i][j][2])
+        for name, mesh in self.meshes.items():
+            for i in range(len(mesh)): #i is a triangle, following this structure : [color,(x,y,z),(x,y,z),(x,y,z)]
+                #a triangle as 3 dots (here j is a dot) :
+                for j in range(1,len(self.meshes[name][i])):
+                    new_dot = self.rotation(self.meshes[name][i][j][0],self.meshes[name][i][j][1],self.meshes[name][i][j][2],x,y,z)
+                    self.meshes[name][i][j] = (new_dot[0],new_dot[1],new_dot[2])
 
     def add_line(self,x1,y1,z1, x2,y2,z2,name,color="black"):
         '''to add a simple line and create custom shapes'''
