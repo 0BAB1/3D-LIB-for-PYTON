@@ -1,5 +1,6 @@
 HELLO, HERE IS MY TODO LIST
 
+make origins nicer, get ready for camera implementation
 make the add_surf code shorter (reliable math to buiild meshes for all shapes)
 make the rotation code shorter
 direct shapes adding

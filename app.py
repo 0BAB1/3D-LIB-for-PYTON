@@ -5,14 +5,16 @@ class App (tk.Tk):
         '''App main class, specify a 3d vectorial space'''
         #init window
         tk.Tk.__init__(self)
+        self.canvas_width, self.canvas_height = 720 , 480
         self.geometry("720x480")
         self.resizable(False, False)
+        self.make_widgets()
         #array containing dots on the screen
+        self.space = space
         self.dots = []
         self.meshes = []
-        self.space = space
-        #represent the space
-        self.make_widgets()
+        self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2}
+        print(self.ofFset)
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
         self.sensitivity = 0.4 #mouse sens.
         self.x = 0
@@ -35,13 +37,13 @@ class App (tk.Tk):
     
     def make_widgets(self):
         '''create a test canvas'''
-        self.m_canvas = tk.Canvas(width=720, height=480, background="white")
+        self.m_canvas = tk.Canvas(width=self.canvas_width, height=self.canvas_height, background="white")
         self.m_canvas.pack()
 
     def add_dot(self, x, y, color="black"):
         '''add dot a specified coords (x,y) on the canvas'''
         #create a black dot, create line returns its id so we can delete it later on
-        self.dots.append(self.m_canvas.create_line(x+720/2, y+480/2, x+720/2+1, y+480/2, fill=color))
+        self.dots.append(self.m_canvas.create_line(x+self.ofFset["x"], y+self.ofFset["y"], x+self.ofFset["x"]+1, y+self.ofFset["y"], fill=color))
         #the 480 and 720 values are canvas' width and height, this has to be improved
 
     def reset(self):
@@ -65,7 +67,11 @@ class App (tk.Tk):
             for triangle in mesh: 
                 # mesh : [ (color,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
                 #  ^^list of triangles    ^^this is triangle 1     ^^ this is triangle 2    .. etc
-                self.meshes.append(self.m_canvas.create_polygon(triangle[1][0]+720/2,triangle[1][1]+480/2,triangle[2][0]+720/2,triangle[2][1]+480/2,triangle[3][0]+720/2,triangle[3][1]+480/2,fill=triangle[0],outline="grey"))
+                self.meshes.append(self.m_canvas.create_polygon(
+                    triangle[1][0]+self.ofFset["x"],triangle[1][1]+self.ofFset["y"],
+                    triangle[2][0]+self.ofFset["x"],triangle[2][1]+self.ofFset["y"],
+                    triangle[3][0]+self.ofFset["x"],triangle[3][1]+self.ofFset["y"],
+                    fill=triangle[0],outline="grey"))
                 #and as always, only a projection so only x and y are taken, color last
 
         #structure of space.dots:
