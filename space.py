@@ -11,6 +11,9 @@ class Space:
         #meshes structure : {"name" : mesh}
         #mesh : [triangle1, triangle2, ..]
         #triangle : (color, (XYZ), (XYZ), (XYZ))
+        #--------------------------------------
+        #keeping track of rotaions :
+        self.rotations = {"x":0,"y":0,"z":0}
     
     def origin(self):
         '''this function will draw the main origin at 0,0,0 into the space'''
@@ -39,12 +42,20 @@ class Space:
         if name in self.dots:
             self.dots.pop(name)
 
+    def rotation(self, x, y, z, Rx, Ry, Rz):
+        '''mainly used by rotation method, gice it a point and an angle, returns a tuple with new coords, used to siplify code'''
+        
+        
     def rotate(self,x,y,z):
         '''to rotate every shape around x y or / and z'''
         # note for contributors: this method can be reduced with the help of an external function
         # but python will round numbers and make the rotation completely broken
         # maybe i made a mistake somewhere, but for now, i just go brute force as it doesn't use too much ressources
         # feel free to give it a try ! (create a new branch please, call it "rotation" or something like that)
+        self.rotations["x"] += x 
+        self.rotations["y"] += y
+        self.rotations["z"] += z
+        
         rotationX =[
             [1,0,0],
             [0,math.cos(x),-math.sin(x)],
