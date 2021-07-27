@@ -38,5 +38,8 @@ the project is new, more shapes and possibilities comming soon !
 ## see what you made
 
 You can now see thing on your windows's canvas when you lunch the app !
-These dotted lines is the main origin, it is not considered as a shape.
-If you did evverything corectly, your shapes will show up the canvas, you will have to use arrow keys to move thing around.
+If you did evverything corectly, your shapes will show up the canvas, you will have to use your mouse to move thing around.
+
+# The maths behind the project
+
+Basic topology, basic algebra (rotation matrix)

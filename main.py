@@ -5,6 +5,6 @@ from space import Space
 space = Space()
 application = App(space)
 space.add_line(0,0,0 ,100,100,100,"line1","green")
-space.add_surf(0,0,0,50,0,0,0,50,0,"surf1", "blue")
+space.add_surf(0,0,0,50,0,0,100,0,0,"surf1", "blue")
 application.represent_space()
 application.mainloop()

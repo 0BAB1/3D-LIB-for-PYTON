@@ -5,20 +5,20 @@ class App (tk.Tk):
         '''App main class, specify a 3d vectorial space'''
         #init window
         tk.Tk.__init__(self)
+        #here goes window infos
         self.canvas_width, self.canvas_height = 720 , 480
+        self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2}
         self.geometry("720x480")
         self.resizable(False, False)
+        #....................
         self.make_widgets()
-        #array containing dots on the screen
         self.space = space
-        self.dots = []
         self.meshes = []
-        self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2}
-        print(self.ofFset)
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
         self.sensitivity = 0.4 #mouse sens.
         self.x = 0
         self.y = 0
+        #binds
         self.m_canvas.bind_all("<B1-Motion>", self.motion)
         self.m_canvas.bind_all("<Motion>", self.refresh_mouse_position)
 
@@ -32,7 +32,7 @@ class App (tk.Tk):
         Dy = self.y-y
         #update new x and y in app
         self.x, self.y = x, y
-        self.space.rotate(self.sensitivity*Dy/100,-self.sensitivity*Dx/100,0)
+        self.space.rotate(-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0)
         self.represent_space()
     
     def make_widgets(self):
@@ -40,17 +40,8 @@ class App (tk.Tk):
         self.m_canvas = tk.Canvas(width=self.canvas_width, height=self.canvas_height, background="white")
         self.m_canvas.pack()
 
-    def add_dot(self, x, y, color="black"):
-        '''add dot a specified coords (x,y) on the canvas'''
-        #create a black dot, create line returns its id so we can delete it later on
-        self.dots.append(self.m_canvas.create_line(x+self.ofFset["x"], y+self.ofFset["y"], x+self.ofFset["x"]+1, y+self.ofFset["y"], fill=color))
-        #the 480 and 720 values are canvas' width and height, this has to be improved
-
     def reset(self):
         '''used to delete all dots on the screen'''
-        for dot in self.dots:
-            self.m_canvas.delete(dot)
-        self.dots = []
         for mesh in self.meshes:
             self.m_canvas.delete(mesh)
         self.meshes = []
@@ -58,29 +49,15 @@ class App (tk.Tk):
     def represent_space(self):
         '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
         self.reset() #get rid of dots in the canvas
-            
-        for dot in self.space.origin_dots:
-            self.add_dot(dot[0], dot[1], "red")
         
         for name, mesh in self.space.meshes.items():
-            #memo : structure : {"name" : [(color, (x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of mesh, which is a tuple of of dots + a color
+            #memo : structure : {"name" : [(color, outline,(x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of mesh, which is a tuple of of dots + a color
             for triangle in mesh: 
-                # mesh : [ (color,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
+                # mesh : [ (color,outline,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
                 #  ^^list of triangles    ^^this is triangle 1     ^^ this is triangle 2    .. etc
                 self.meshes.append(self.m_canvas.create_polygon(
-                    triangle[1][0]+self.ofFset["x"],triangle[1][1]+self.ofFset["y"],
                     triangle[2][0]+self.ofFset["x"],triangle[2][1]+self.ofFset["y"],
                     triangle[3][0]+self.ofFset["x"],triangle[3][1]+self.ofFset["y"],
-                    fill=triangle[0],outline="grey"))
+                    triangle[4][0]+self.ofFset["x"],triangle[4][1]+self.ofFset["y"],
+                    fill=triangle[0],outline=triangle[1]))
                 #and as always, only a projection so only x and y are taken, color last
-
-        #structure of space.dots:
-        #
-        # {"name" : [(x,y,z,color) , (x,y,z,color) , ...] , ...}
-        #
-        # -- project dots on the canvas --
-
-        for name, shape in self.space.dots.items():
-            #as the dot is projected, only x and y coords wil be used
-            for dot in shape:
-                self.add_dot(dot[0], dot[1], dot[3])

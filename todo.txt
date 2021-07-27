@@ -1,8 +1,10 @@
 HELLO, HERE IS MY TODO LIST
 
-make origins nicer, get ready for camera implementation
-make the add_surf code shorter (reliable math to buiild meshes for all shapes)
-make the rotation code shorter
+add project explaination on readme.md
+add camera
+add shape object (add nodes (transform, shaders, mesh, etc...))
+re-think rendering
+make the add_surf code shorter (reliable math of surface, STUDY TOPOLOGY YOU MORRON)
 direct shapes adding
-math function (bruh)
+math function (bruh) (goes wit toppology)
 rework origin
