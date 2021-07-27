@@ -13,7 +13,7 @@ class App (tk.Tk):
         #....................
         self.make_widgets()
         self.space = space
-        self.meshes = []
+        self.triangles = []
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
         self.sensitivity = 0.4 #mouse sens.
         self.x = 0
@@ -42,22 +42,10 @@ class App (tk.Tk):
 
     def reset(self):
         '''used to delete all dots on the screen'''
-        for mesh in self.meshes:
-            self.m_canvas.delete(mesh)
-        self.meshes = []
+        for triangle in self.triangles:
+            self.m_canvas.delete(triangle)
+        self.triangles = []
 
     def represent_space(self):
         '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
         self.reset() #get rid of dots in the canvas
-        
-        for name, mesh in self.space.meshes.items():
-            #memo : structure : {"name" : [(color, outline,(x,y,z),(x,y,z),(x,z,y) ),( (xyz),(xyz),(xyz) ) etc]} or, an array of mesh, which is a tuple of of dots + a color
-            for triangle in mesh: 
-                # mesh : [ (color,outline,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
-                #  ^^list of triangles    ^^this is triangle 1     ^^ this is triangle 2    .. etc
-                self.meshes.append(self.m_canvas.create_polygon(
-                    triangle[2][0]+self.ofFset["x"],triangle[2][1]+self.ofFset["y"],
-                    triangle[3][0]+self.ofFset["x"],triangle[3][1]+self.ofFset["y"],
-                    triangle[4][0]+self.ofFset["x"],triangle[4][1]+self.ofFset["y"],
-                    fill=triangle[0],outline=triangle[1]))
-                #and as always, only a projection so only x and y are taken, color last
