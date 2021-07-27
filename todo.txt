@@ -1,9 +1,7 @@
 HELLO, HERE IS MY TODO LIST
 
 add project explaination on readme.md
-add camera
 add shape object (add nodes (transform, shaders, mesh, etc...))
-re-think rendering
 make the add_surf code shorter (reliable math of surface, STUDY TOPOLOGY YOU MORRON)
 direct shapes adding
 math function (bruh) (goes wit toppology)
@@ -11,3 +9,4 @@ rework origin
 fix del shape issue
 objectify mesh
 add culling, shaders (objectify everithing i guess)
+WE HAVE TO ADD CAMERA BEFORE BACK FACE CULLING? HERE IS ARTICLE : https://jeux.developpez.com/faq/3d/?page=culling
