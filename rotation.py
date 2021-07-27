@@ -1,3 +1,5 @@
+from math import cos, sin
+
 def rotation(x, y, z, Rx, Ry, Rz) -> tuple:
     '''mainly used by rotation method, give it a dot and an angle, returns a tuple with new coords, used to siplify code'''
 
