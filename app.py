@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.constants import S
 
 class App (tk.Tk):
     def __init__(self, space):
@@ -48,4 +49,13 @@ class App (tk.Tk):
 
     def represent_space(self):
         '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
-        self.reset() #get rid of dots in the canvas
+        self.reset() #get rid of triagles in canvas
+        for shape in self.space.shapes:
+            for triangle in shape.mesh:
+                self.triangles.append(self.m_canvas.create_polygon( # we only give x and y coords, since there is no camera, we "project" on the canvas
+                    triangle[2][0]+self.ofFset["x"]+shape.position[0],triangle[2][1]+self.ofFset["y"]+shape.position[1], #dot1
+                    triangle[3][0]+self.ofFset["x"]+shape.position[0],triangle[3][1]+self.ofFset["y"]+shape.position[1], #dot2
+                    triangle[4][0]+self.ofFset["x"]+shape.position[0],triangle[4][1]+self.ofFset["y"]+shape.position[1], #dot3
+                    fill=triangle[0],outline=triangle[1])) #colors
+                    #as you can see, we also apply offsets here
+        self.m_canvas.update()

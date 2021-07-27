@@ -1,8 +1,10 @@
+from typing import List
 from rotation import rotation
 
 class Shape:
     '''this class create a shape, with a transfomation tracker'''
-    def __init__(self):
+    def __init__(self, id="none"):
+        self.id = id
         self.transformation = {
             "Tx" : 0,
             "Ty" : 0,
@@ -22,7 +24,14 @@ class Shape:
                 for j in range(2, len(self.mesh[i])):
                     self.mesh[i][j] = rotation(self.mesh[i][j][0],self.mesh[i][j][1],self.mesh[i][j][2], rx, ry, rz)
         if not tx == 0 or not ty == 0 or not tz == 0 :
-            self.position.__add__((tx,ty,tz))
+            self.position = (self.position[0] + tx, self.position[1]+ty, self.position[2]+tz)
                 
     def set_position(self, x, y, z):
         self.position = (x,y,z)
+
+class Line(Shape):
+    '''line shape, give it tow dots to link'''
+    def __init__(self, x1, y1, z1, x2, y2, z2, color = "black", id="none"):
+        super().__init__(id)
+        #append a single triangle with 3 allgned dots
+        self.mesh.append(["",color,(x1,y1,z1), (x1,y1,z1), (x2,y2,z2)])
