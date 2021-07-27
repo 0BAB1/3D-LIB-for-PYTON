@@ -1,15 +1,11 @@
 #later on, this class will be controlled by a camera, and not the app
 from math import sin, cos
+from mesh import Mesh
 
 class Scene:
     '''this class represent the 3d scene (euclidian norms) that will be projected on the canvas'''
     def __init__(self):
-        self.meshes={}
-        #meshes structure : {"name" : mesh}
-        #mesh : [triangle1, triangle2, ..]
-        #triangle : (color, (XYZ), (XYZ), (XYZ))
-        #--------------------------------------
-        #keeping track of rotaions :
+        self.meshes={} #array of Mesh objet
         self.rotations = {"x":0,"y":0,"z":0}
     
     def del_shape(self, name):

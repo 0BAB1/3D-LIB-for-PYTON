@@ -13,7 +13,7 @@ class App (tk.Tk):
         #....................
         self.make_widgets()
         self.space = space
-        self.meshes = []
+        self.triangles = []
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
         self.sensitivity = 0.4 #mouse sens.
         self.x = 0
@@ -55,7 +55,7 @@ class App (tk.Tk):
             for triangle in mesh: 
                 # mesh : [ (color,outline,(dot1),(dot2),(dot3)) , (color,(dot1),(dot2),(dot3))]
                 #  ^^list of triangles    ^^this is triangle 1     ^^ this is triangle 2    .. etc
-                self.meshes.append(self.m_canvas.create_polygon(
+                self.triangles.append(self.m_canvas.create_polygon(
                     triangle[2][0]+self.ofFset["x"],triangle[2][1]+self.ofFset["y"],
                     triangle[3][0]+self.ofFset["x"],triangle[3][1]+self.ofFset["y"],
                     triangle[4][0]+self.ofFset["x"],triangle[4][1]+self.ofFset["y"],

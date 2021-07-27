@@ -1,2 +1,4 @@
 class Mesh:
-    pass
+    def __init__(self):
+        self.vertices = []
+        self.faces = []
