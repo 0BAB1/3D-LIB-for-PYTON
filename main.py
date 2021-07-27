@@ -14,7 +14,6 @@ line3 = Line(0,0,0,0,0,100,"red","3")
 space.add_shape(line1,0,0,0)
 space.add_shape(line2,0,0,0)
 space.add_shape(line3,0,0,0)
-
 #test zone
 lineTest = Line(0,0,0,150,150,200,"green","test")
 space.add_shape(lineTest,20,40,60)

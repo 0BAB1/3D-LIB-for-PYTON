@@ -1,6 +1,4 @@
 from math import sin, cos
-from shape import Shape
-from typing import List
 from rotation import rotation
 
 class Space:
