@@ -9,3 +9,5 @@ direct shapes adding
 math function (bruh) (goes wit toppology)
 rework origin
 fix del shape issue
+objectify mesh
+add culling, shaders (objectify everithing i guess)
