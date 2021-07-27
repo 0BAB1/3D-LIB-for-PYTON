@@ -23,14 +23,7 @@ application.mainloop()
 ## add shapes with those commands (!! between space and mainloop !!):
 
 ```python
-#add a line, with two dots
-space.add_line(x1,y1,z1, x2,y2,z2, "name","color")
-
-#add a surface, with three dots
-space.add_surf(x1,y1,z1, x2,y2,z2, x3,y3,z3, "name", "color")
-
-#you can also remove a shape
-space.del_shape("name")
+#work in progress
 ```
 
 the project is new, more shapes and possibilities comming soon !
