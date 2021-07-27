@@ -1,8 +1,8 @@
 #later on, this class will be controlled by a camera, and not the app
 from math import sin, cos
 
-class Space:
-    '''this class represent the 3d space (euclidian norms) that will be projected on the canvas'''
+class Scene:
+    '''this class represent the 3d scene (euclidian norms) that will be projected on the canvas'''
     def __init__(self):
         self.meshes={}
         #meshes structure : {"name" : mesh}

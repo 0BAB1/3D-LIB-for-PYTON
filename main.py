@@ -1,8 +1,8 @@
 from app import App
-from space import Space
+from scene import Scene
 #FIRTS VERSION
 #basic use : create a space and an application
-space = Space()
+space = Scene()
 application = App(space)
 space.add_line(0,0,0 ,100,100,100,"line1","green")
 space.add_surf(0,0,0,50,0,0,100,0,0,"surf1", "blue")
