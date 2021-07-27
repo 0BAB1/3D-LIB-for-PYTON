@@ -2,9 +2,11 @@ HELLO, HERE IS MY TODO LIST
 
 add project explaination on readme.md
 add camera
-add shape object (add nodes (transform, shaders, mesh, etc...))
-re-think rendering
-make the add_surf code shorter (reliable math of surface, STUDY TOPOLOGY YOU MORRON)
+--big math work :--
+    add shape object (add nodes (transform, shaders, mesh, etc...))
+    make the add_surf code shorter (reliable math of surface, STUDY TOPOLOGY YOU MORRON)
+    math function (bruh) (goes with topology)
 direct shapes adding
-math function (bruh) (goes wit toppology)
 rework origin
+re-think rendering
+bitmap instead of canvas maybe ?

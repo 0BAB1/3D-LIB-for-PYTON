@@ -1,3 +1,4 @@
+#later on, this class will be controlled by a camera, and not the app
 from math import sin, cos
 
 class Space:
@@ -45,7 +46,7 @@ class Space:
 
         return (new_x, new_y, new_z)
         
-    def rotate(self,x,y,z):
+    def rotate(self,x,y,z) -> tuple:
         '''to rotate every shape around x y or / and z'''
         self.rotations["x"] += x 
         self.rotations["y"] += y
