@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter.constants import S
 
 class App (tk.Tk):
-    def __init__(self, space):
+    def __init__(self, camera):
         '''App main class, specify a 3d vectorial space'''
         #init window
         tk.Tk.__init__(self)
@@ -13,7 +13,7 @@ class App (tk.Tk):
         self.resizable(False, False)
         #....................
         self.make_widgets()
-        self.space = space
+        self.camera = camera
         self.triangles = []
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
         self.sensitivity = 0.4 #mouse sens.
@@ -33,8 +33,8 @@ class App (tk.Tk):
         Dy = self.y-y
         #update new x and y in app
         self.x, self.y = x, y
-        self.space.rotate(-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0)
-        self.represent_space()
+        self.camera.space.rotate(-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0)
+        self.render()
     
     def make_widgets(self):
         '''create a test canvas'''
@@ -47,15 +47,6 @@ class App (tk.Tk):
             self.m_canvas.delete(triangle)
         self.triangles = []
 
-    def represent_space(self):
-        '''this method wil add, one by one, all the space's dots with only their x and y coords (and refresh btw)'''
-        self.reset() #get rid of triagles in canvas
-        for shape in self.space.shapes:
-            for triangle in shape.mesh:
-                self.triangles.append(self.m_canvas.create_polygon( # we only give x and y coords, since there is no camera, we "project" on the canvas
-                    triangle[2][0]+self.ofFset["x"]+shape.position[0],triangle[2][1]+self.ofFset["y"]+shape.position[1], #dot1
-                    triangle[3][0]+self.ofFset["x"]+shape.position[0],triangle[3][1]+self.ofFset["y"]+shape.position[1], #dot2
-                    triangle[4][0]+self.ofFset["x"]+shape.position[0],triangle[4][1]+self.ofFset["y"]+shape.position[1], #dot3
-                    fill=triangle[0],outline=triangle[1])) #colors
-                    #as you can see, we also apply offsets here
-        self.m_canvas.update()
+    def render(self):
+        pass
+        

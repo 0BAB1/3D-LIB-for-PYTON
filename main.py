@@ -2,10 +2,12 @@ from tkinter import Grid
 from shape import Line, Shape
 from app import App
 from space import Space
+from camera import Camera
 #FIRTS VERSION
 #basic use : create a space and an application
 space = Space()
-application = App(space)
+camera = Camera(space)
+application = App(camera)
 
 #create an origin
 line1 = Line(0,0,0,100,0,0,"red","1")
@@ -18,5 +20,5 @@ space.add_shape(line3,0,0,0)
 lineTest = Line(0,0,0,150,150,200,"green","test")
 space.add_shape(lineTest,20,40,60)
 
-application.represent_space()
+application.render()
 application.mainloop()
