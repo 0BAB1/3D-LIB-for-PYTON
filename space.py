@@ -1,5 +1,5 @@
 from math import sin, cos
-from rotation import rotation
+from algebra import rotation
 
 class Space:
     '''this class represent the 3d space (euclidian norms) that will be projected on the canvas'''

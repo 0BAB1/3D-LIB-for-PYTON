@@ -1,5 +1,5 @@
 from typing import List
-from rotation import rotation
+from algebra import rotation
 
 class Shape:
     '''this class create a shape, with a transfomation tracker'''
