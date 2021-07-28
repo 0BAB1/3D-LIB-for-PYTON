@@ -7,9 +7,9 @@ class App (tk.Tk):
         #init window
         tk.Tk.__init__(self)
         #here goes window infos
-        self.canvas_width, self.canvas_height = 720 , 480
+        self.canvas_width, self.canvas_height = 1920 , 1080
         self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2}
-        self.geometry("720x480")
+        self.geometry("1920x1080")
         self.resizable(False, False)
         #....................
         self.make_widgets()
