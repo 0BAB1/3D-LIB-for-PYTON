@@ -1,5 +1,8 @@
+# dev notes : strategy to code camera
+# well, first, get rid of main space transformation, as the space will ow just serve to assign shapes some coordonates
+# and what we want to do, is translate main space to coords relative  to the camera
 class Camera():
-    '''this is the camera class, give it a space to ob'''
+    '''this is the camera class, give it a space to observe'''
     def __init__(self,space):
         self.position = (0,0,0)
         self.transformations = {

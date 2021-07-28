@@ -16,7 +16,11 @@ class Shape:
                 for j in range(2, len(self.mesh[i])):
                     self.mesh[i][j] = rotation(self.mesh[i][j][0],self.mesh[i][j][1],self.mesh[i][j][2], rx, ry, rz)
         if not tx == 0 or not ty == 0 or not tz == 0 :
-            self.position = (self.position[0] + tx, self.position[1]+ty, self.position[2]+tz)
+            self.position = (
+                self.position[0] + tx,
+                self.position[1] + ty,
+                self.position[2] + tz
+            )
                 
     def set_position(self, x, y, z):
         self.position = (x,y,z)
