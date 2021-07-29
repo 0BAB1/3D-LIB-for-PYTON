@@ -7,9 +7,9 @@ class App (tk.Tk):
         #init window
         tk.Tk.__init__(self)
         #here goes window infos
-        self.canvas_width, self.canvas_height = 1920 , 1080
+        self.canvas_width, self.canvas_height = 1280 , 720
         self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2}
-        self.geometry("1920x1080")
+        self.geometry("1280x720")
         self.resizable(False, False)
         #....................
         self.make_widgets()
@@ -22,6 +22,13 @@ class App (tk.Tk):
         #binds
         self.m_canvas.bind_all("<B1-Motion>", self.motion)
         self.m_canvas.bind_all("<Motion>", self.refresh_mouse_position)
+        self.m_canvas.bind_all("<Up>", self.move_camera)
+
+    def move_camera(self, event):
+        self.camera.transform(0,0,1,0,0,0)
+        self.camera.pre_render()
+        self.render()
+        print("test")
 
     def refresh_mouse_position(self, event):
         self.x, self.y = event.x, event.y
@@ -48,5 +55,14 @@ class App (tk.Tk):
         self.triangles = []
 
     def render(self):
-        pass
-        
+        self.reset()
+        #we will go aroun
+        self.camera.pre_render() #do the camera pre_render
+        for i in range(len(self.camera.triangles)):#a triangle
+            self.triangles.append(self.m_canvas.create_polygon(
+                self.camera.triangles[i][2][0] + self.ofFset["x"] ,self.camera.triangles[i][2][1] + self.ofFset["y"],
+                self.camera.triangles[i][3][0] + self.ofFset["x"] ,self.camera.triangles[i][3][1] + self.ofFset["y"],
+                self.camera.triangles[i][4][0] + self.ofFset["x"] ,self.camera.triangles[i][4][1] + self.ofFset["y"],
+                fill= self.camera.triangles[i][0],outline=self.camera.triangles[i][1]
+            ))
+            print("drawn")

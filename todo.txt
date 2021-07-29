@@ -4,9 +4,11 @@ add project explaination on readme.md
 add shape object (add nodes (transform, shaders, mesh, etc...))
 make the add_surf code shorter (reliable math of surface, STUDY TOPOLOGY YOU MORRON)
 direct shapes adding
-math function (bruh) (goes wit toppology)
+math function (bruh) (goes with toppology)
 rework origin
 fix del shape issue
 objectify mesh
 add culling, shaders (objectify everithing i guess)
 WE HAVE TO ADD CAMERA BEFORE BACK FACE CULLING? HERE IS ARTICLE : https://jeux.developpez.com/faq/3d/?page=culling
+give the rotation method a costom rotation origin (relative to the object)
+make a common object with transform() method for space, camera and shape
