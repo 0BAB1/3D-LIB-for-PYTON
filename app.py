@@ -65,4 +65,3 @@ class App (tk.Tk):
                 self.camera.triangles[i][4][0] + self.ofFset["x"] ,self.camera.triangles[i][4][1] + self.ofFset["y"],
                 fill= self.camera.triangles[i][0],outline=self.camera.triangles[i][1]
             ))
-            print(self.camera.triangles[i])
