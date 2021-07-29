@@ -25,7 +25,7 @@ class App (tk.Tk):
         self.m_canvas.bind_all("<Up>", self.move_camera)
 
     def move_camera(self, event):
-        self.camera.transform(0,0,1,0,0,0)
+        self.camera.transform(0,0,10,0,0,0)
         self.camera.pre_render()
         self.render()
         print("test")
@@ -40,7 +40,7 @@ class App (tk.Tk):
         Dy = self.y-y
         #update new x and y in app
         self.x, self.y = x, y
-        self.camera.space.rotate(-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0)
+        self.camera.space.rotate(self.sensitivity*Dy/100,-self.sensitivity*Dx/100,0)
         self.render()
     
     def make_widgets(self):
@@ -65,4 +65,4 @@ class App (tk.Tk):
                 self.camera.triangles[i][4][0] + self.ofFset["x"] ,self.camera.triangles[i][4][1] + self.ofFset["y"],
                 fill= self.camera.triangles[i][0],outline=self.camera.triangles[i][1]
             ))
-            print("drawn")
+            print(self.camera.triangles[i])

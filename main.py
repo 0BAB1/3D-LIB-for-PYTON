@@ -17,10 +17,10 @@ space.add_shape(line1,0,0,0)
 space.add_shape(line2,0,0,0)
 space.add_shape(line3,0,0,0)
 #test zone
-lineTest = Line(0,0,0,150,150,200,"green","test")
+lineTest = Line(0,0,0,50,50,50,"green","test")
 space.add_shape(lineTest,0,0,0)
 
-camera.transform(0,0,-100,0,0,0)
+camera.transform(0,0,-500,0,0,0)
 camera.pre_render()
 application.render()
 application.mainloop()

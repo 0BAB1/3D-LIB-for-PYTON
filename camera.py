@@ -1,4 +1,5 @@
 from algebra import rotation
+from math import tan, radians
 
 class Camera():
     '''this is the camera class, give it a space to observe'''
@@ -7,7 +8,8 @@ class Camera():
         self.rotations = (0,0,0)
         self.space = space
         self.triangles = [] #the triangle to render and draw on app.py
-        self.focal_lenght = 100
+        self.FOV = 90 #fov in degrees
+        self.focal_lenght = (720/2)/tan(radians(self.FOV/2))#(secreenheight/2) / tan(fov/2)
         #reminder : 
         #an array of triangles : [triangle1 , triangle2 , etc...]
         #atriangle looks like this : [color, outline, (xyz),(xyz),(xyz)]
@@ -37,7 +39,6 @@ class Camera():
                         self.space.shapes[i].mesh[j][k][1]-self.position[1],
                         self.space.shapes[i].mesh[j][k][2]-self.position[2]
                     )#coords relative to camera
-                    print(relativeCoords)
 
                     temp_dot = rotation(
                         relativeCoords[0],
@@ -59,4 +60,3 @@ class Camera():
                 triangle[0] = self.space.shapes[i].mesh[j][0] #color
                 triangle[1] = self.space.shapes[i].mesh[j][1] #outine
                 self.triangles.append(triangle)
-                print(self.triangles)

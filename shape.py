@@ -30,4 +30,4 @@ class Line(Shape):
     def __init__(self, x1, y1, z1, x2, y2, z2, color = "black", id="none"):
         super().__init__(id)
         #append a single triangle with 3 allgned dots
-        self.mesh.append([color,color,(0,0,0), (0,50,0), (0,0,50)])
+        self.mesh.append([color,color,(x1,y1,z1), (x1,y1,z1), (x2,y2,z2)])
