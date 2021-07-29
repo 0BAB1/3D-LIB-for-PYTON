@@ -12,3 +12,5 @@ add culling, shaders (objectify everithing i guess)
 WE HAVE TO ADD CAMERA BEFORE BACK FACE CULLING? HERE IS ARTICLE : https://jeux.developpez.com/faq/3d/?page=culling
 give the rotation method a costom rotation origin (relative to the object)
 make a common object with transform() method for space, camera and shape
+better binds : tkinter.fdex.eu/doc/event.html
+generate a focal lenght from a fov
