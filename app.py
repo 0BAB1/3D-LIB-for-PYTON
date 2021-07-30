@@ -44,9 +44,11 @@ class App (tk.Tk):
         self.render()
 
     def refresh_mouse_position(self, event):
+        '''refresh mouse pos'''
         self.x, self.y = event.x, event.y
 
     def motion(self, event):
+        '''use delta mouse pos te create an angle and moove things around'''
         x, y = event.x , event.y
         #make delta
         Dx = self.x-x
@@ -68,6 +70,7 @@ class App (tk.Tk):
         self.triangles = []
 
     def render(self):
+        '''order a camera prerender, and render the triangles on the screen'''
         self.reset()
         #we will go aroun
         self.camera.pre_render() #do the camera pre_render
