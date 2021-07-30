@@ -1,5 +1,7 @@
 from math import cos, sin
 
+def dot_product(vect1,vect2):
+    '''takes 2 vect ∈ ℝ3, return the dot product'''
 def rotation(x, y, z, Rx, Ry, Rz) -> tuple:
     '''mainly used by rotation method, give it a dot and an angle, returns a tuple with new coords, used to siplify code'''
 

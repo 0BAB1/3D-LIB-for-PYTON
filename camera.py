@@ -18,6 +18,7 @@ class Camera():
         '''this methode will make the camera move around, rotate around it own axis'''
         self.position = (self.position[0]+tx,self.position[1]+ty,self.position[2]+tz)
         self.rotations = (self.rotations[0]+rx,self.rotations[1]+ry,self.rotations[2]+rz)
+        
     def pre_render(self):
         '''this method execute the pre-render, to give the right coordonates directly to the main render in app.py'''
         # here is my strategy , we go aroud all dots,

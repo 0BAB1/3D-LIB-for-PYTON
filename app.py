@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter.constants import S
+from algebra import rotation
 
 class App (tk.Tk):
     def __init__(self, camera):
@@ -22,13 +23,25 @@ class App (tk.Tk):
         #binds
         self.m_canvas.bind_all("<B1-Motion>", self.motion)
         self.m_canvas.bind_all("<Motion>", self.refresh_mouse_position)
-        self.m_canvas.bind_all("<Up>", self.move_camera)
+        self.m_canvas.bind_all("<Key>", self.move_camera)
 
     def move_camera(self, event):
-        self.camera.transform(0,0,10,0,0,0)
-        self.camera.pre_render()
+        '''this method will move the camera around'''
+        key = event.char
+        # we have to make the camera go forward, depending on its orientation
+        # we have to fond the vector that direct our translation of the camera
+        vect_dir_z = rotation(0,0,10,self.camera.rotations[0],self.camera.rotations[1],self.camera.rotations[2])
+        vect_dir_x = rotation(10,0,0,self.camera.rotations[0],self.camera.rotations[1],self.camera.rotations[2])
+        if key == "z":
+            self.camera.transform(vect_dir_z[0],vect_dir_z[1],vect_dir_z[2],0,0,0)
+        if key == "q":
+            self.camera.transform(-vect_dir_x[0],-vect_dir_x[1],-vect_dir_x[2],0,0,0)
+        if key == "s":
+            self.camera.transform(-vect_dir_z[0],-vect_dir_z[1],-vect_dir_z[2],0,0,0)
+        if key == "d":
+            self.camera.transform(vect_dir_x[0],vect_dir_x[1],vect_dir_x[2],0,0,0)
+
         self.render()
-        print("test")
 
     def refresh_mouse_position(self, event):
         self.x, self.y = event.x, event.y
@@ -40,7 +53,7 @@ class App (tk.Tk):
         Dy = self.y-y
         #update new x and y in app
         self.x, self.y = x, y
-        self.camera.space.rotate(self.sensitivity*Dy/100,-self.sensitivity*Dx/100,0)
+        self.camera.transform(0,0,0,-self.sensitivity*Dy/100,self.sensitivity*Dx/100,0) #if the space behave strangely, it might come fomr here, play around with + and -
         self.render()
     
     def make_widgets(self):
