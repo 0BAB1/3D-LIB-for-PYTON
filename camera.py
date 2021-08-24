@@ -24,7 +24,7 @@ class Camera():
         # here is my strategy , we go aroud all dots,
         # we express all dots relatiely to our camera position,
         # which we quiclky apply rotation matrix with our self.rotation angles, but in negative
-        # then we apply thales on, depending on :
+        # then we apply Thales on, depending on :
         # focal_lenght / ditacnce = Xwelookingfor / X = Ywelookingfor / Y
         # we re-store everything as triangles and it's done
         self.triangles = [] #reset our tiangles list

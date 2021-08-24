@@ -7,17 +7,7 @@ this python script will allow you to get basic 3d prewiews on a python canvas or
 ## initialize your vizualisation window :
 
 ```python
-from app import App
-from space import Space
-
-#create a 3d space where your shapes will evolve
-space = Space()
-
-#create an app and specify the space your want to show on the screen
-application = App(space)
-
-#this tkinter method will lunch the window's main loop
-application.mainloop()
+#work in progress
 ```
 
 ## add shapes with those commands (!! between space and mainloop !!):
@@ -35,4 +25,4 @@ If you did evverything corectly, your shapes will show up the canvas, you will h
 
 # The maths behind the project
 
-Basic topology, basic algebra (rotation matrix)
+basic algebra (rotation matrix)

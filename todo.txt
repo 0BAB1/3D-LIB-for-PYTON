@@ -1,34 +1,36 @@
-HELLO, HERE IS MY TODO LIST
+TODO LIST
 
+#######
 TO DO:
+#######
 
-avoid close / back camera render bugs
-optimize the camera mouvement
-add z-buffer
-add project explaination on readme.md
-(add nodes (transform, shaders, mesh, etc...))
-make the add_surf code shorter (reliable math of surface, STUDY TOPOLOGY YOU MORRON)
-math function (bruh) (goes with toppology)
-fix del shape issue
-objectify mesh
-add culling, shaders (objectify everithing i guess)
-WE HAVE TO ADD CAMERA BEFORE BACK FACE CULLING? HERE IS ARTICLE : https://jeux.developpez.com/faq/3d/?page=culling
-give the rotation method a costom rotation origin (relative to the object)
-make a common object with transform() method for space, camera and shape
++++ avoid close / back camera pre render and render bugs
++ add project explaination on readme.md
+++++ math function for 3 surface with cartesian eqquations (bruh) (goes with toppology) (tiangulize everything) (ask mr mazat)
++ fix del shape issue
+++++ objectify mesh (turn mesh into an object, get the normal of each surface to dot product and generate lighning of Z buffer)
+++ give the rotation method a costom rotation origin (relative to the object)
++++ make a common object with transform() method for space, camera and shape
 
 
+#####################
+##WORK IN PROGRESS:##
+#####################
+deal with git branches organisation
 
-WORK IN PROGRESS:
 
-
+######
 OVER:
+######
+
 
 -add shape object
 -better binds : tkinter.fdex.eu/doc/event.html
 
 
-
+#######
 FORGET:
+#######
 
 rework origin
 direct shapes adding

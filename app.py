@@ -7,19 +7,26 @@ class App (tk.Tk):
         '''App main class, specify a 3d vectorial space'''
         #init window
         tk.Tk.__init__(self)
+
         #here goes window infos
         self.canvas_width, self.canvas_height = 1280 , 720
-        self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2}
+        self.ofFset = {"x" : self.canvas_width/2, "y" : self.canvas_height/2} #the offset is here to draww triangle and other element on the center of the canvas (the screen)
         self.geometry("1280x720")
         self.resizable(False, False)
         #....................
         self.make_widgets()
+        #the camera, which contains the space as an attribute, and pre render it with the pre-render() camera's method, the pre render data is then rendered on the canvas via app's render() method
         self.camera = camera
+
+        #this array (self.triangles)  will strore the triangles that has been drawn on the canavas
+        # in order to remove all of them with a simple loop on each frame
         self.triangles = []
+
         #mouse tracker to create Dx and Dy to generate rotation from mouse mouvement
         self.sensitivity = 0.4 #mouse sens.
         self.x = 0
         self.y = 0
+
         #binds
         self.m_canvas.bind_all("<B1-Motion>", self.motion)
         self.m_canvas.bind_all("<Motion>", self.refresh_mouse_position)

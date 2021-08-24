@@ -1,4 +1,7 @@
 from math import cos, sin
+#
+#  This file will contain all algebra (for later) (dot product, vectorial product, matrix product etc...)
+#
 
 def rotation(x, y, z, Rx, Ry, Rz) -> tuple:
     '''mainly used by rotation method, give it a dot and an angle, returns a tuple with new coords, used to siplify code'''

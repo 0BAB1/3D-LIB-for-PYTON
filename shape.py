@@ -31,3 +31,7 @@ class Line(Shape):
         super().__init__(id)
         #append a single triangle with 3 allgned dots
         self.mesh.append([color,color,(x1,y1,z1), (x1,y1,z1), (x2,y2,z2)])
+
+#note : add more shapes
+#note : before that, see how to triangulize 3 surface from their cartesian euation
+#note : generate square, see method on paper
