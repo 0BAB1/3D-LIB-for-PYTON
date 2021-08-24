@@ -18,7 +18,7 @@ space.add_shape(line1,0,0,0)
 space.add_shape(line2,0,0,0)
 space.add_shape(line3,0,0,0)
 
-#test zone
+#test zone (add simple grren line z = y = x at the origin)
 lineTest = Line(0,0,0,50,50,50,"green","test")
 space.add_shape(lineTest,0,0,0)
 
