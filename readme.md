@@ -2,11 +2,12 @@
 
 this python script will allow you to get basic 3d prewiews on a python canvas or your tkinter projects, there aree no dependencies to install, only tkinter and math !
 
-## see what you made
+## old project ..
 
-You can now see thing on your windows's canvas when you lunch the app !
-If you did evverything corectly, your shapes will show up the canvas, you will have to use your mouse to move thing around.
+This project was one on my first on python ... And it was actually pretty big !
 
-# The maths behind the project
+An entire 3D engine that renders onto a simple tkinter canvas to reduce setup command and boilerplate code to the *bare minimum*. It responds to mouse mouvement and has a camera !
 
-basic algebra (rotation matrix)
+It was an application of basic linear algebra we studied in class.
+
+I never really finished this project. The next step was to add shaders ! I'm not doing it today because i do not need to learn anymore and there is no need for a CPU based 3D engine on "vanilla python" with no GPU acceleration whatsoever.
